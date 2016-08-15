@@ -1,16 +1,16 @@
-import HeaderModule from './header'
-import HeaderController from './header.controller';
-import HeaderComponent from './header.component';
-import HeaderTemplate from './header.html';
+import NavigationModule from './navigation'
+import NavigationController from './navigation.controller';
+import NavigationComponent from './navigation.component';
+import NavigationTemplate from './navigation.html';
 
-describe('Header', () => {
+describe('Navigation', () => {
   let $rootScope, makeController;
 
-  beforeEach(window.module(HeaderModule));
+  beforeEach(window.module(NavigationModule));
   beforeEach(inject((_$rootScope_) => {
     $rootScope = _$rootScope_;
     makeController = () => {
-      return new HeaderController();
+      return new NavigationController();
     };
   }));
 
@@ -30,20 +30,20 @@ describe('Header', () => {
     // template specs
     // tip: use regex to ensure correct bindings are used e.g., {{  }}
     it('has name in template [REMOVE]', () => {
-      expect(HeaderTemplate).to.match(/{{\s?\$ctrl\.name\s?}}/g);
+      expect(NavigationTemplate).to.match(/{{\s?\$ctrl\.name\s?}}/g);
     });
   });
 
   describe('Component', () => {
       // component/directive specs
-      let component = HeaderComponent;
+      let component = NavigationComponent;
 
       it('includes the intended template',() => {
-        expect(component.template).to.equal(HeaderTemplate);
+        expect(component.template).to.equal(NavigationTemplate);
       });
 
       it('invokes the right controller', () => {
-        expect(component.controller).to.equal(HeaderController);
+        expect(component.controller).to.equal(NavigationController);
       });
   });
 });

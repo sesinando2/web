@@ -4,14 +4,18 @@ import Common from './common/common';
 import Components from './components/components';
 import AppComponent from './app.component';
 import 'normalize.css';
-import 'startbootstrap-sb-admin-2/bower_components/bootstrap/dist/css/bootstrap.min.css';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import 'startbootstrap-sb-admin-2/bower_components/metisMenu/dist/metisMenu.min.css';
 import 'startbootstrap-sb-admin-2/dist/css/timeline.css';
 import 'startbootstrap-sb-admin-2/dist/css/sb-admin-2.css';
 import 'startbootstrap-sb-admin-2/bower_components/morrisjs/morris.css';
 import 'font-awesome/css/font-awesome.min.css';
+
 import 'startbootstrap-sb-admin-2/bower_components/jquery/dist/jquery.min';
-import 'startbootstrap-sb-admin-2/bower_components/bootstrap/dist/js/bootstrap.min';
+import 'bootstrap/dist/js/bootstrap.min';
+import 'startbootstrap-sb-admin-2/bower_components/metisMenu/dist/metisMenu.min';
+import 'startbootstrap-sb-admin-2/dist/js/sb-admin-2';
 
 angular.module('app', [
     uiRouter,
