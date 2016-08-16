@@ -12,8 +12,12 @@ let peopleModule = angular.module('people', [
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
-    .state('people', {
+    .state('home', {
       url: '/',
+      component: 'people'
+    })
+    .state('people', {
+      url: '/people',
       component: 'people'
     });
 })
