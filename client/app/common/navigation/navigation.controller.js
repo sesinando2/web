@@ -9,8 +9,6 @@ class NavigationController {
     this.name = 'navigation';
     this.logo = logo;
     this.username = userInfo.name;
-
-    console.log($state);
   }
 }
 

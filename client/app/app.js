@@ -16,6 +16,7 @@ import 'startbootstrap-sb-admin-2/bower_components/jquery/dist/jquery.min';
 import 'bootstrap/dist/js/bootstrap.min';
 import 'startbootstrap-sb-admin-2/bower_components/metisMenu/dist/metisMenu.min';
 import 'startbootstrap-sb-admin-2/dist/js/sb-admin-2';
+import 'angular-bootstrap';
 
 angular.module('app', [
     uiRouter,
@@ -26,7 +27,20 @@ angular.module('app', [
     "ngInject";
     // @see: https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions
     // #how-to-configure-your-server-to-work-with-html5mode
-    /*$locationProvider.html5Mode(false).hashPrefix('!');*/
+    // $locationProvider.html5Mode(false).hashPrefix('!');
   })
 
-  .component('app', AppComponent);
+  .component('app', AppComponent)
+
+  .directive('a', function () {
+    return {
+      restrict: 'E',
+      link: function(scope, elem, attrs) {
+        if (attrs.ngClick || attrs.href === '' || attrs.href === '#'){
+          elem.on('click', function(e){
+            e.preventDefault();
+          });
+        }
+      }
+    };
+  });

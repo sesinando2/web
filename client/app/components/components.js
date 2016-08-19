@@ -1,9 +1,10 @@
 import angular from 'angular';
-import People from './people/people';
+import Log from './log/log';
 import Group from './group/group';
+import People from './people/people';
 
 let componentModule = angular.module('app.components', [
-  People, Group
+  Log, Group, People
 ])
 
 .name;

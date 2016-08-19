@@ -7,15 +7,26 @@ navigation
     padding: 5px 15px
 
   & .navbar-top-links > li
-      &.open>a, &>a:focus, &>a:hover
-          background none !important
+      &.open > a, & > a:focus, & > a:hover
+          background none
           color #ffffff
 
-  & .sidebar ul li a.active
-    z-index 2
-    color #ffffff
-    background-color #337ab7
-    border-color #337ab7
+  & .sidebar
+    & ul li a.active
+      z-index 2
+      color #ffffff
+      background-color #337ab7
+      border-color #337ab7
+
+  & .nav > menu-item > li
+    position: relative
+    display: block
+
+    & > a, & > a:hover
+      position relative
+      display block
+      padding 10px 15px
+      text-decoration none
 
 
 

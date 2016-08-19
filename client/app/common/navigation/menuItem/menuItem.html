@@ -1,0 +1,5 @@
+<li>
+  <a ng-href="{{$ctrl.link || $ctrl.$state.href($ctrl.state) || '#link'}}" ng-class="{active: $ctrl.active}">
+    <i class="fa" ng-class="$ctrl.icons"></i> <span ng-bind-html="$ctrl.text"></span>
+  </a>
+</li>

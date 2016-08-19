@@ -10,6 +10,7 @@
     "normalize.css": "^3.0.3"
   },
   "devDependencies": {
+    "angular-bootstrap": "^0.12.2",
     "angular-mocks": "^1.5.0",
     "angular-sanitize": "^1.5.8",
     "babel-core": "^6.7.7",

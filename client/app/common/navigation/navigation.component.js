@@ -4,7 +4,9 @@ import './navigation.styl';
 
 let navigationComponent = {
   restrict: 'E',
-  bindings: {},
+  bindings: {
+    definition: '<'
+  },
   template,
   controller
 };
