@@ -6,8 +6,13 @@ navigation
   & .navbar-brand
     padding: 5px 15px
 
-  & .navbar-top-links > li
-      &.open > a, & > a:focus, & > a:hover
+  & .navbar-top-links
+    & > li, & > li.open
+      & > a
+        background-color transparent
+        background none
+
+        &:focus, &:hover
           background none
           color #ffffff
 
