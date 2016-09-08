@@ -4,7 +4,9 @@ import './page.styl';
 
 let pageComponent = {
   restrict: 'E',
-  bindings: {},
+  bindings: {
+    title: '@'
+  },
   template,
   controller,
   transclude: true

@@ -1,11 +1,8 @@
 class PageController {
-  constructor($timeout) {
+
+  /* @ngInject */
+  constructor() {
     this.name = 'page';
-    angular.element(document).ready(() => {
-      $timeout(() => {
-        $('div#wrapper').show();
-      }, 100);
-    });
   }
 }
 
