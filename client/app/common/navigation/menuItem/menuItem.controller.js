@@ -1,4 +1,6 @@
 class MenuItemController {
+
+  /* @ngInject */
   constructor($state, $window) {
     this.$state = $state;
     this.$window = $window;
