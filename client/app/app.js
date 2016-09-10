@@ -2,6 +2,7 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import Common from './common/common';
 import Components from './components/components';
+import Services from './services/services';
 import AppComponent from './app.component';
 import 'normalize.css';
 
@@ -21,7 +22,8 @@ import 'angular-bootstrap';
 angular.module('app', [
     uiRouter,
     Common,
-    Components
+    Components,
+    Services
   ])
 
   /*.config(($locationProvider) => {
@@ -31,17 +33,4 @@ angular.module('app', [
     // $locationProvider.html5Mode(false).hashPrefix('!');
   })*/
 
-  .component('app', AppComponent)
-
-  .directive('a', function () {
-    return {
-      restrict: 'E',
-      link: function(scope, elem, attrs) {
-        if (attrs.ngClick || attrs.href === '' || attrs.href === '#'){
-          elem.on('click', function(e){
-            e.preventDefault();
-          });
-        }
-      }
-    };
-  });
+  .component('app', AppComponent);
