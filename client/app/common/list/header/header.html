@@ -1,16 +1,11 @@
 <div class="list-header">
   <div class="input-group">
-    <span class="input-group-addon search-button">
-      <a>
-        <span class="glyphicon glyphicon-search"></span>
-      </a>
+    <span class="input-group-addon search-button" ng-class="{ 'btn-success': $ctrl.search }">
+      <a><span class="glyphicon glyphicon-search" ng-class="$ctrl.searchButtonIcon"></span></a>
     </span>
-      <input name="search" type="text" class="form-control"
-             placeholder="Search" ng-model="$ctrl.search" ng-model-options="{ debounce: 500}">
-      <span class="input-group-addon">
-      <a href="#">
-        <span class="glyphicon glyphicon-plus"></span>
-      </a>
+    <input name="search" type="text" class="form-control" placeholder="Search" ng-model="$ctrl.search" ng-model-options="{ debounce: 500}">
+    <span class="input-group-addon">
+      <a><span class="glyphicon glyphicon-plus"></span></a>
     </span>
   </div>
 </div>

@@ -1,14 +1,11 @@
 import angular from 'angular';
-import ngAnimate from 'angular-animate';
 import Header from './header.directive';
 
-let listModule = angular.module('list.header', [
-  ngAnimate
-])
+let listModule = angular.module('list.header', [])
 
-.directive('listHeader', ($window) => {
+.directive('listHeader', ($window, $timeout) => {
   "ngInject"
-  return new Header($window);
+  return new Header($window, $timeout);
 })
 
 .name;
