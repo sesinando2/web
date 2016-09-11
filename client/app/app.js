@@ -14,6 +14,7 @@ import 'startbootstrap-sb-admin-2/bower_components/morrisjs/morris.css';
 import 'font-awesome/css/font-awesome.min.css';
 
 import 'startbootstrap-sb-admin-2/bower_components/jquery/dist/jquery.min';
+import 'jquery-ui'
 import 'bootstrap/dist/js/bootstrap.min';
 import 'startbootstrap-sb-admin-2/bower_components/metisMenu/dist/metisMenu.min';
 import 'startbootstrap-sb-admin-2/dist/js/sb-admin-2';

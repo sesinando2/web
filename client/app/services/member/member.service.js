@@ -7,12 +7,16 @@ class MemberService {
   }
 
   list(max, current, query, accountId) {
-    let offset = (current - 1) * max;
     return new Promise((resolve, reject) => {
-      let onSuccess = this._handle(resolve);
-      let onError = this._handle(reject);
-      this._resource.query({ offset: offset, max: max, q: query, sort: 'name', accountId: accountId }, onSuccess, onError);
+      this._resource.query(
+        { offset: this._offset(current, max), max: max, q: query, sort: 'name', accountId: accountId },
+        this._handle(resolve), this._handle(reject)
+      );
     });
+  }
+
+  _offset(current, max) {
+    return (current - 1) * max;
   }
 
   _handle(handler) {
