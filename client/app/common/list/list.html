@@ -2,9 +2,15 @@
   <div class="panel-heading">
     <list-header search="$ctrl.search" search-changed="$ctrl.onSearchChanged(search)"></list-header>
   </div>
-  <div class="panel-body">
+  <!--<div class="panel-body">
     {{$ctrl.search}}
-  </div>
+  </div>-->
+  <ul class="list-group" style="max-height: 410px">
+    <li ng-repeat="data in $ctrl.data track by data.id" class="list-group-item"
+        ng-class="{ disabled: !$ctrl.enabled, active: $ctrl.selected == data }" ng-click="$ctrl.select()">
+      <member item="data"></member>
+    </li>
+  </ul>
 </div>
 <div class="text-center" ng-if="$ctrl.pageCount > 1">
   <ul uib-pagination total-items="$ctrl.count" ng-model="$ctrl.currentPage" max-size="4"

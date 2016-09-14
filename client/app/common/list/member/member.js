@@ -1,9 +1,9 @@
 import angular from 'angular';
-import uiRouter from 'angular-ui-router';
+import uiBootstrap from 'angular-ui-bootstrap';
 import memberComponent from './member.component';
 
-let memberModule = angular.module('member', [
-  uiRouter
+let memberModule = angular.module('list.member', [
+  uiBootstrap
 ])
 
 .component('member', memberComponent)

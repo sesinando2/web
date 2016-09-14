@@ -8,11 +8,16 @@ class ListController {
     this.max = 10;
     this.count = 0;
     this.pageCount = 0;
+    this.enabled = true;
     this.currentPage = 1;
   }
 
   $onInit() {
     this._updateList();
+  }
+
+  selectMember() {
+    console.log('selectMember');
   }
 
   onSearchChanged(search) {
@@ -25,14 +30,18 @@ class ListController {
   }
 
   _updateList() {
-    this.list({ max: this.max, currentPage: this.currentPage, query: this.search }).then((response) => {
-      let header = response.header;
-      this.$timeout(() => {
-        this.data = response.data;
-        console.log(response.data);
-        this.count = parseInt(header('count'));
-        this.pageCount = Math.ceil(this.count / this.max);
-      });
+    this.enabled = false;
+    this.list({ max: this.max, currentPage: this.currentPage, query: this.search })
+      .then((response) => this._handleResponse(response));
+  }
+
+  _handleResponse(response) {
+    let header = response.header;
+    this.$timeout(() => {
+      this.data = response.data;
+      this.count = parseInt(header('count'));
+      this.pageCount = Math.ceil(this.count / this.max);
+      this.enabled = true;
     });
   }
 }
