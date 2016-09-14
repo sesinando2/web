@@ -1,13 +1,17 @@
-<ng-switch on="$ctrl.icon">
-  <i class="fa fa-user" ng-switch-when="user" ng-class="$ctrl.iconCss" uib-tooltip="{{$ctrl.iconTooltip}}" tooltip-placement="right"></i>
-  <span class="glyphicon glyphicon-phone" ng-switch-when="phone" ng-class="$ctrl.iconCss" uib-tooltip="{{$ctrl.iconTooltip}}" tooltip-placement="right"></span>
-</ng-switch>
-{{$ctrl.item.name}}
-<div class="pull-right" style="z-index: 800">
-  <a href="" ng-class="$ctrl.availabilityCss" ng-click="$ctrl.toggleAvailability()" uib-tooltip="{{$ctrl.availabilityTooltip}}" tooltip-placement="left">
-    <span class="glyphicon glyphicon-ok"></span>
-  </a>
-  <a href="" ng-click="$ctrl.deleteMember()" ng-class="$ctrl.deleteCss" style="margin-left: 5px" uib-tooltip="Click to Delete" tooltip-enabled="!$ctrl.item.noDelete" tooltip-placement="left">
-    <span class="glyphicon glyphicon-trash"></span>
-  </a>
+<div class="member">
+  <div class="left-section" ng-click="$ctrl.selectMember()">
+    <ng-switch on="$ctrl.icon">
+      <i class="fa fa-user" ng-switch-when="user" ng-class="$ctrl.iconCss" uib-tooltip="{{$ctrl.iconTooltip}}" tooltip-placement="right"></i>
+      <span class="glyphicon glyphicon-phone" ng-switch-when="phone" ng-class="$ctrl.iconCss" uib-tooltip="{{$ctrl.iconTooltip}}" tooltip-placement="right"></span>
+    </ng-switch>
+    {{$ctrl.item.name}}
+  </div>
+  <div class="pull-right right-section">
+    <a href="" ng-class="$ctrl.availabilityCss" ng-click="$ctrl.toggleAvailability()" uib-tooltip="{{$ctrl.availabilityTooltip}}" tooltip-placement="left">
+      <span class="glyphicon glyphicon-ok"></span>
+    </a>
+    <a href="" ng-click="$ctrl.deleteMember()" ng-class="$ctrl.deleteCss" style="margin-left: 5px" uib-tooltip="Click to Delete" tooltip-enabled="!$ctrl.item.noDelete" tooltip-placement="left">
+      <span class="glyphicon glyphicon-trash"></span>
+    </a>
+  </div>
 </div>

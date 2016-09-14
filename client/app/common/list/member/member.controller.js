@@ -1,11 +1,15 @@
 class MemberController {
 
+  selectMember() {
+    this.item.select();
+  }
+
   toggleAvailability() {
-    console.log('toggleAvailability');
+    this.item.toggleAvailability();
   }
 
   deleteMember() {
-    console.log('deleteMember');
+    this.item.delete();
   }
 
   get icon() {

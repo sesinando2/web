@@ -13,11 +13,14 @@ class ListController {
   }
 
   $onInit() {
+    if (this.register) {
+      this.register({ component: this });
+    }
     this._updateList();
   }
 
-  selectMember() {
-    console.log('selectMember');
+  refresh() {
+    this._updateList();
   }
 
   onSearchChanged(search) {
