@@ -1,8 +1,13 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <list-header search="$ctrl.search"></list-header>
+    <list-header search="$ctrl.search" search-changed="$ctrl.onSearchChanged(search)"></list-header>
   </div>
   <div class="panel-body">
     {{$ctrl.search}}
   </div>
+</div>
+<div class="text-center" ng-if="$ctrl.pageCount > 1">
+  <ul uib-pagination total-items="$ctrl.count" ng-model="$ctrl.currentPage" max-size="4"
+      class="pagination-sm" ng-change="$ctrl.onPageChange()" boundary-links="false" rotate="false"
+      num-pages="$ctrl.pageCount" next-text="&raquo;" previous-text="&laquo;"></ul>
 </div>

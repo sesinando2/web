@@ -2,17 +2,12 @@ class PeopleController {
 
   /* @ngInject */
   constructor(memberService, userInfo) {
-    this.name = 'people';
     this.memberService = memberService;
     this.userInfo = userInfo;
   }
 
-  $onInit() {
-
-  }
-
-  list() {
-    return this.memberService.list(10, 1, null, this.userInfo.account.id)
+  list(max, currentPage, query) {
+    return this.memberService.list(max, currentPage, query, this.userInfo.account.id)
   }
 }
 

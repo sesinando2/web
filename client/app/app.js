@@ -18,7 +18,6 @@ import 'jquery-ui'
 import 'bootstrap/dist/js/bootstrap.min';
 import 'startbootstrap-sb-admin-2/bower_components/metisMenu/dist/metisMenu.min';
 import 'startbootstrap-sb-admin-2/dist/js/sb-admin-2';
-import 'angular-bootstrap';
 
 angular.module('app', [
     uiRouter,

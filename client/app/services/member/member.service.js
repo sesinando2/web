@@ -1,3 +1,5 @@
+import Member from './member.model';
+
 class MemberService {
 
   /* @ngInject */
@@ -10,7 +12,7 @@ class MemberService {
     return new Promise((resolve, reject) => {
       this._resource.query(
         { offset: this._offset(current, max), max: max, q: query, sort: 'name', accountId: accountId },
-        this._handle(resolve), this._handle(reject)
+        this._onSuccess(resolve), this._handle(reject)
       );
     });
   }
@@ -21,7 +23,16 @@ class MemberService {
 
   _handle(handler) {
     return (data, header) => {
-      handler(data, header);
+      handler({ data, header });
+    }
+  }
+
+  _onSuccess(resolve) {
+    return (data, header) => {
+      if (data && data instanceof Array) {
+        data = data.map((member) => new Member(member));
+      }
+      resolve({data, header})
     }
   }
 

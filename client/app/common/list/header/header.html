@@ -3,7 +3,8 @@
     <span class="input-group-addon search-button" ng-class="{ 'btn-success': $ctrl.search }">
       <a><span class="glyphicon glyphicon-search" ng-class="$ctrl.searchButtonIcon"></span></a>
     </span>
-    <input name="search" type="text" class="form-control" placeholder="Search" ng-model="$ctrl.search" ng-model-options="{ debounce: 500}">
+    <input name="search" type="text" class="form-control" ng-change="$ctrl.onChange()"
+           placeholder="Search" ng-model="$ctrl.search" ng-model-options="{ debounce: 500}">
     <span class="input-group-addon">
       <a><span class="glyphicon glyphicon-plus"></span></a>
     </span>
