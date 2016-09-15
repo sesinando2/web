@@ -1,9 +1,5 @@
 class MemberController {
 
-  selectMember() {
-    this._doIfEnabled(() => this.item.select());
-  }
-
   toggleAvailability() {
     this._doIfEnabled(() => this.item.toggleAvailability());
   }
