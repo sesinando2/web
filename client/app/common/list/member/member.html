@@ -1,18 +1,16 @@
-<div class="member">
-  <div class="left-section" ng-click="$ctrl.selectMember()">
-    <ng-switch on="$ctrl.icon">
-      <i class="fa fa-user" ng-switch-when="user" ng-class="$ctrl.iconCss" uib-tooltip="{{$ctrl.iconTooltip}}" tooltip-placement="right"></i>
-      <span class="glyphicon glyphicon-phone" ng-switch-when="phone" ng-class="$ctrl.iconCss" uib-tooltip="{{$ctrl.iconTooltip}}" tooltip-placement="right"></span>
-    </ng-switch>
-    {{$ctrl.item.name}}
-  </div>
+<div class="member" ng-click="$ctrl.selectMember()">
+  <ng-switch on="$ctrl.icon">
+    <i class="fa fa-user" ng-switch-when="user" ng-class="$ctrl.iconCss" uib-tooltip="{{$ctrl.iconTooltip}}" tooltip-placement="right"></i>
+    <span class="glyphicon glyphicon-phone" ng-switch-when="phone" ng-class="$ctrl.iconCss" uib-tooltip="{{$ctrl.iconTooltip}}" tooltip-placement="right"></span>
+  </ng-switch>
+  {{$ctrl.item.name}}
   <div class="pull-right right-section">
-    <a href="" ng-click="$ctrl.toggleAvailability()"
+    <a href="" ng-click="$ctrl.toggleAvailability(); $event.stopPropagation();"
        ng-class="{ 'has-default': !$ctrl.item.available, 'has-success': $ctrl.item.available, 'disabled': !$ctrl.enabled }"
        uib-tooltip="{{$ctrl.availabilityTooltip}}" tooltip-placement="left" tooltip-enable="$ctrl.enabled">
       <span class="glyphicon glyphicon-ok"></span>
     </a>
-    <a href="" ng-click="$ctrl.deleteMember()" style="margin-left: 5px"
+    <a href="" ng-click="$ctrl.deleteMember(); $event.stopPropagation();" class="delete-button"
        ng-class="{ 'has-error': !$ctrl.item.noDelete, 'disabled': $ctrl.item.noDelete || !$ctrl.enabled }"
        uib-tooltip="Click to Delete" tooltip-enable="!$ctrl.item.noDelete && $ctrl.enabled" tooltip-placement="left">
       <span class="glyphicon glyphicon-trash"></span>
