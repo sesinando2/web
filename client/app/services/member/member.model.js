@@ -2,6 +2,9 @@ class Member {
 
   constructor(data) {
     Object.assign(this, data);
+
+    this._roles = [];
+
     this._select = null;
     this._toggleAvailability = null;
     this._delete = null;
@@ -22,6 +25,12 @@ class Member {
   toggleAvailability() {
     if (this._toggleAvailability) {
       this._toggleAvailability(this);
+    }
+  }
+
+  set roles(roleList) {
+    if (roleList && roleList instanceof Array) {
+      this._roles = roleList;
     }
   }
 

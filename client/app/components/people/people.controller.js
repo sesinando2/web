@@ -18,18 +18,21 @@ class PeopleController {
 
   _handleListResponse(response) {
     if (response.data && response.data instanceof Array) {
-      response.data.forEach((member) => {
-        member.selectHandler = this._select.bind(this);
-        member.deleteHandler = this._delete.bind(this);
-        member.toggleAvailabilityHandler = this._toggleAvailability.bind(this);
-      });
+      response.data.forEach((member) => this._bindHandlers(member));
     }
     return response;
   }
 
+  _bindHandlers(member) {
+    member.selectHandler = this._select.bind(this);
+    member.deleteHandler = this._delete.bind(this);
+    member.toggleAvailabilityHandler = this._toggleAvailability.bind(this);
+  }
+
   _select(member) {
-    console.log('people.select');
-    console.log(member);
+    this.memberService.get({ id: member.id }).then((response) => {
+      console.log(response);
+    });
   }
 
   _delete(member) {

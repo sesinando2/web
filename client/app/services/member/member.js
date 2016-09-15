@@ -2,7 +2,7 @@ import angular from 'angular';
 import ngResource from 'angular-resource';
 import MemberService from './member.service';
 
-let memberModule = angular.module('member', [
+let memberModule = angular.module('services.member', [
   ngResource,
   'config'
 ])
