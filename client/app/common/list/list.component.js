@@ -5,8 +5,9 @@ import './list.styl';
 let listComponent = {
   restrict: 'E',
   bindings: {
-    list: '&',
-    register: '&'
+    list:     '&',
+    register: '&',
+    enabled:  '=',
   },
   template,
   controller

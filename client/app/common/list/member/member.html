@@ -7,10 +7,14 @@
     {{$ctrl.item.name}}
   </div>
   <div class="pull-right right-section">
-    <a href="" ng-class="$ctrl.availabilityCss" ng-click="$ctrl.toggleAvailability()" uib-tooltip="{{$ctrl.availabilityTooltip}}" tooltip-placement="left">
+    <a href="" ng-click="$ctrl.toggleAvailability()"
+       ng-class="{ 'has-default': !$ctrl.item.available, 'has-success': $ctrl.item.available, 'disabled': !$ctrl.enabled }"
+       uib-tooltip="{{$ctrl.availabilityTooltip}}" tooltip-placement="left" tooltip-enable="$ctrl.enabled">
       <span class="glyphicon glyphicon-ok"></span>
     </a>
-    <a href="" ng-click="$ctrl.deleteMember()" ng-class="$ctrl.deleteCss" style="margin-left: 5px" uib-tooltip="Click to Delete" tooltip-enabled="!$ctrl.item.noDelete" tooltip-placement="left">
+    <a href="" ng-click="$ctrl.deleteMember()" style="margin-left: 5px"
+       ng-class="{ 'has-error': !$ctrl.item.noDelete, 'disabled': $ctrl.item.noDelete || !$ctrl.enabled }"
+       uib-tooltip="Click to Delete" tooltip-enable="!$ctrl.item.noDelete && $ctrl.enabled" tooltip-placement="left">
       <span class="glyphicon glyphicon-trash"></span>
     </a>
   </div>

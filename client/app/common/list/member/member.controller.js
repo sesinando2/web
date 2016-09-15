@@ -1,15 +1,21 @@
 class MemberController {
 
   selectMember() {
-    this.item.select();
+    this._doIfEnabled(() => this.item.select());
   }
 
   toggleAvailability() {
-    this.item.toggleAvailability();
+    this._doIfEnabled(() => this.item.toggleAvailability());
   }
 
   deleteMember() {
-    this.item.delete();
+    this._doIfEnabled(() => this.item.delete());
+  }
+
+  _doIfEnabled(action) {
+    if (this.enabled) {
+      action();
+    }
   }
 
   get icon() {
@@ -18,14 +24,6 @@ class MemberController {
 
   get iconCss() {
     return { admin: this.item.admin };
-  }
-
-  get availabilityCss() {
-    return { 'has-default': !this.item.available, 'has-success': this.item.available };
-  }
-
-  get deleteCss() {
-    return { 'has-error': !this.item.noDelete, 'disabled': this.item.noDelete };
   }
 
   get iconTooltip() {

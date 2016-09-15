@@ -8,7 +8,7 @@
   <ul class="list-group" style="max-height: 410px">
     <li ng-repeat="data in $ctrl.data track by data.id" class="list-group-item"
         ng-class="{ disabled: !$ctrl.enabled, active: $ctrl.selected == data }">
-      <member item="data"></member>
+      <member item="data" enabled="$ctrl.enabled"></member>
     </li>
   </ul>
 </div>

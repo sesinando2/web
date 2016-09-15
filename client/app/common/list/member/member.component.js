@@ -5,7 +5,8 @@ import './member.styl';
 let memberComponent = {
   restrict: 'E',
   bindings: {
-    item: '<'
+    item:     '<',
+    enabled:  '<'
   },
   template,
   controller

@@ -1,7 +1,8 @@
 <page title="People">
   <div class="row">
     <div class="col-md-5 col-lg-4">
-      <list list="$ctrl.list(max, currentPage, query)" register="$ctrl.registerList(component)"/>
+      {{$ctrl.loading}}
+      <list list="$ctrl.list(max, currentPage, query)" register="$ctrl.registerList(component)" enabled="$ctrl.listEnabled"/>
     </div>
   </div>
 </page>

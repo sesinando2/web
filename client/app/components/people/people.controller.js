@@ -1,9 +1,12 @@
 class PeopleController {
 
   /* @ngInject */
-  constructor(memberService, userInfo) {
+  constructor($timeout, memberService, userInfo) {
+    this.$timeout = $timeout;
     this.memberService = memberService;
     this.userInfo = userInfo;
+
+    this.loading = true;
     this.listComponent = null;
   }
 
@@ -13,7 +16,7 @@ class PeopleController {
 
   list(max, currentPage, query) {
     return this.memberService.list(max, currentPage, query, this.userInfo.account.id)
-      .then((response) => { return this._handleListResponse(response) });
+      .then((response) => this._handleListResponse(response));
   }
 
   _handleListResponse(response) {
@@ -30,8 +33,12 @@ class PeopleController {
   }
 
   _select(member) {
+    this.listEnabled = false;
     this.memberService.get({ id: member.id }).then((response) => {
-      console.log(response);
+      this.$timeout(() => {
+        console.log(response);
+        this.listEnabled = true;
+      });
     });
   }
 

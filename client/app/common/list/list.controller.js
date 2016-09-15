@@ -8,7 +8,6 @@ class ListController {
     this.max = 10;
     this.count = 0;
     this.pageCount = 0;
-    this.enabled = true;
     this.currentPage = 1;
   }
 
