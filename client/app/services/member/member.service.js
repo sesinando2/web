@@ -1,39 +1,30 @@
+import BaseService from '../common/base-service';
 import Member from './member.model';
 
-class MemberService {
+class MemberService extends BaseService {
 
   /* @ngInject */
-  constructor($resource, baseUrl) {
-    this.$resource = $resource;
-    this.baseUrl = baseUrl;
+  constructor($resource, baseUrl, profileService) {
+    super($resource, baseUrl);
+    this.profileService = profileService;
   }
 
   list(max, current, query, accountId) {
-    return new Promise((resolve, reject) => {
-      this._resource.query(
-        { offset: this._offset(current, max), max: max, q: query, sort: 'name', accountId: accountId },
-        this._onSuccess(resolve), this._handle(reject)
-      );
+    return this.query({ offset: this._offset(current, max), max, q: query, sort: 'name', accountId });
+  }
+
+  get(query) {
+    return super.get(query).then((response) => {
+      let member = response.data;
+      return this.profileService.query({ memberId: member.id }).then((profileResponse) => {
+        member.roles = profileResponse.data;
+        return response;
+      });
     });
   }
 
-  _offset(current, max) {
-    return (current - 1) * max;
-  }
-
-  _handle(handler) {
-    return (data, header) => {
-      handler({ data, header });
-    }
-  }
-
-  _onSuccess(resolve) {
-    return (data, header) => {
-      if (data && data instanceof Array) {
-        data = data.map((member) => new Member(member));
-      }
-      resolve({data, header})
-    }
+  _wrapData(data) {
+    return new Member(data);
   }
 
   get _resource() {
