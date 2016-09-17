@@ -31,7 +31,7 @@ class MenuItemController {
     if (this.link) {
       isActive = this.$window.location.hash === this.link;
     } else if (this.states.length > 0) {
-      isActive = this.states.includes(this.$state.current.name);
+      isActive = this.$state.includes(this.state);
     }
     return isActive;
   }

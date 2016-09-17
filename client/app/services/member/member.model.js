@@ -10,40 +10,10 @@ class Member {
     this._delete = null;
   }
 
-  select() {
-    if (this._select) {
-      this._select(this);
-    }
-  }
-
-  delete() {
-    if (this._delete) {
-      this._delete(this);
-    }
-  }
-
-  toggleAvailability() {
-    if (this._toggleAvailability) {
-      this._toggleAvailability(this);
-    }
-  }
-
   set roles(roleList) {
     if (roleList && roleList instanceof Array) {
       this._roles = roleList;
     }
-  }
-
-  set selectHandler(value) {
-    this._select = value;
-  }
-
-  set deleteHandler(value) {
-    this._delete = value;
-  }
-
-  set toggleAvailabilityHandler(value) {
-    this._toggleAvailability = value;
   }
 }
 

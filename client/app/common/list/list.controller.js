@@ -22,12 +22,6 @@ class ListController {
     this._updateList();
   }
 
-  select(item) {
-    if (this.enabled) {
-      item.select();
-    }
-  }
-
   onSearchChanged(search) {
     this.search = search;
     this._updateList();

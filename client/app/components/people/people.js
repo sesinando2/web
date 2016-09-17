@@ -1,24 +1,32 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
+import Form from './form/form';
 import peopleComponent from './people.component';
 
 let peopleModule = angular.module('people', [
-  uiRouter
+  uiRouter,
+  Form
 ])
 
-.config(($stateProvider, $urlRouterProvider) => {
+.config(($stateProvider) => {
   "ngInject";
 
-  $urlRouterProvider.otherwise('/');
-
   $stateProvider
-    .state('home', {
-      url: '/',
-      component: 'people'
-    })
     .state('people', {
       url: '/people',
-      component: 'people'
+      component: 'people',
+      resolve: {
+        accountId: (userInfo) => {
+          "ngInject";
+          return userInfo.account ? userInfo.account.id : undefined;
+        },
+        onEnter: ($state, userInfo) => {
+          "ngInject";
+          if (!userInfo.account) {
+            $state.go('account');
+          }
+        }
+      }
     });
 })
 

@@ -1,17 +1,24 @@
 class MemberController {
 
-  toggleAvailability() {
-    this._doIfEnabled(() => this.item.toggleAvailability());
+  constructor($state, memberService) {
+    this.$state = $state;
+    this.memberService = memberService;
   }
 
-  deleteMember() {
-    this._doIfEnabled(() => this.item.delete());
-  }
-
-  _doIfEnabled(action) {
-    if (this.enabled) {
-      action();
+  delete() {
+    if (!this.item.noDelete) {
+      this.memberService.delete(this.item).then(() => {
+        this.$state.transitionTo('people');
+        this.updateList();
+      });
     }
+  }
+
+  toggleAvailability() {
+    this.memberService.toggleAvailability(this.item).then(() => {
+      this.$state.transitionTo('people.details', { id: this.item.id });
+      this.updateList();
+    });
   }
 
   get icon() {

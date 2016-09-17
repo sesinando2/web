@@ -26,11 +26,22 @@ angular.module('app', [
     Services
   ])
 
-  /*.config(($locationProvider) => {
+  .config(($urlRouterProvider) => {
     "ngInject";
+
     // @see: https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions
     // #how-to-configure-your-server-to-work-with-html5mode
     // $locationProvider.html5Mode(false).hashPrefix('!');
-  })*/
+
+    $urlRouterProvider.otherwise('/');
+
+    $urlRouterProvider.when('/', ($state, userInfo) => {
+      if (userInfo.roles.find((role) => role.authority === 'ROLE_ADMIN')) {
+        $state.go('account');
+      } else if (userInfo.account) {
+        $state.go('people');
+      }
+    });
+  })
 
   .component('app', AppComponent);

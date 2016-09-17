@@ -6,7 +6,7 @@ import MenuItem from './menuItem/menuItem';
 import navigationComponent from './navigation.component';
 
 let navigationModule = angular.module('navigation', [
-  uiRouter, ngSanitize, 'config', MenuItem
+  uiRouter, ngSanitize, MenuItem
 ])
 
 .component('navigation', navigationComponent)

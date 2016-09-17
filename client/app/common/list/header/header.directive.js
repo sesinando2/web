@@ -23,10 +23,24 @@ class Header {
 
   link(scope, element, attribute) {
     this.initElements(element);
-    this.searchButton.click(this.onSearchButtonClick(scope, element));
-    this.searchInput.focus(this.onSearchFocus(scope, element));
-    $(this.$window).resize(this.onWindowResize(element));
-    $('body').click(this.onBodyClick(scope, element));
+    let searchButtonClick = this.onSearchButtonClick(scope, element);
+    let searchFocus = this.onSearchFocus(scope, element);
+    let windowResize = this.onWindowResize(element);
+    let bodyClick = this.onBodyClick(scope, element);
+    this.bindHandlers(searchButtonClick, searchFocus, windowResize, bodyClick, element);
+  }
+
+  bindHandlers(searchButtonClick, searchFocus, windowResize, bodyClick, element) {
+    this.searchButton.click(searchButtonClick);
+    this.searchInput.focus(searchFocus);
+    $(this.$window).resize(windowResize);
+    $('body').click(bodyClick);
+    element.on('$destroy', () => {
+      this.searchButton.unbind('click', searchButtonClick);
+      this.searchInput.unbind('focus', searchFocus);
+      $(this.$window).unbind('resize', windowResize);
+      $('body').unbind('click', bodyClick);
+    });
   }
 
   initElements(element) {

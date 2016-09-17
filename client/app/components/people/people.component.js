@@ -4,7 +4,9 @@ import './people.styl';
 
 let peopleComponent = {
   restrict: 'E',
-  bindings: {},
+  bindings: {
+    accountId: '<'
+  },
   template,
   controller
 };
