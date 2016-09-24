@@ -22,98 +22,108 @@ class Header {
   }
 
   link(scope, element) {
-    this.initElements(element);
-    let searchButtonClick = this.onSearchButtonClick(scope, element);
-    let searchFocus = this.onSearchFocus(scope, element);
-    let windowResize = this.onWindowResize(element);
-    let bodyClick = this.onBodyClick(scope, element);
-    this.bindHandlers(searchButtonClick, searchFocus, windowResize, bodyClick, element);
+    this._initElements(element);
+    let searchButtonClick = this._onSearchButtonClick(scope, element);
+    let searchFocus = this._onSearchFocus(scope, element);
+    let windowResize = this._onWindowResize(scope, element);
+    let bodyClick = this._onBodyClick(scope, element);
+    this._bindHandlers(searchButtonClick, searchFocus, windowResize, bodyClick, element);
   }
 
-  bindHandlers(searchButtonClick, searchFocus, windowResize, bodyClick, element) {
-    this.searchButton.click(searchButtonClick);
-    this.searchInput.focus(searchFocus);
-    $(this.$window).resize(windowResize);
-    $('body').click(bodyClick);
-    element.on('$destroy', () => {
-      this.searchButton.unbind('click', searchButtonClick);
-      this.searchInput.unbind('focus', searchFocus);
-      $(this.$window).unbind('resize', windowResize);
-      $('body').unbind('click', bodyClick);
-    });
-  }
-
-  initElements(element) {
+  _initElements(element) {
     this._searchButton = $(element).find('span.search-button');
     this._searchInput = $(element).find('input[name="search"]');
   }
 
-  isSearchButton(target) {
-    return $(target).is(this.searchButton)
-  }
-
-  isChildOfSearchButton(target) {
-    return this.searchButton.has(target).length > 0;
-  }
-
-  width(element) {
-    return $(element).width() - 80;
-  }
-
-  onWindowResize() {
+  _onSearchButtonClick(scope, element) {
     return () => {
-      if (this.searchInput.width() > 0) {
-        this.searchInput.blur();
-      }
-    };
-  }
-
-  onSearchButtonClick(scope, element) {
-    return () => {
-      if (scope.$ctrl.search && this.isSearchInputVisible) {
+      if (scope.$ctrl.search && this._isSearchInputVisible) {
         scope.$ctrl.search = null;
         scope.$ctrl.searchChanged({ search: null });
       }
 
-      if (this.isSearchInputVisible) {
-        this.hideSearchInput(element, scope)
+      if (this._isSearchInputVisible) {
+        this._hideSearchInput(element, scope)
       } else {
-        this.showSearchInput(element, scope)
+        this._showSearchInput(element, scope)
       }
     };
   }
 
-  onSearchFocus(scope, element) {
-    return () => this.showSearchInput(element, scope);
+  _onSearchFocus(scope, element) {
+    return () => this._showSearchInput(element, scope);
   }
 
-  onBodyClick(scope, element) {
+  _onWindowResize(scope, element) {
+    return () => {
+      if (this.searchInput.width() > 0) {
+        this._hideSearchInput(element, scope)
+      }
+    };
+  }
+
+  _onBodyClick(scope, element) {
     return (e) => {
-      if (!this.isSearchButton(e.target) && !this.isChildOfSearchButton(e.target)) {
-        this.hideSearchInput(element, scope);
+      if (this._shouldHideSearchInput(e)) {
+        this._hideSearchInput(element, scope);
       }
     };
   }
 
-  showSearchInput(element, scope) {
-    if (!this.isSearchInputVisible) {
-      this.searchInput.animate({width: `+=${this.width(element)}`, padding: '6px 12px'}, () => {
+  _shouldHideSearchInput(e) {
+    return !this._isSearchButton(e.target) && !this._isChildOfSearchButton(e.target) && !this._isSearchInput(e.target);
+  }
+
+  _bindHandlers(searchButtonClick, searchFocus, windowResize, bodyClick, element) {
+    this.searchButton.click(searchButtonClick);
+    this.searchInput.focus(searchFocus);
+    $(this.$window).resize(windowResize);
+    $('body').click(bodyClick);
+    element.on('$destroy', () => this._unbindHandlers(searchButtonClick, searchFocus, windowResize, bodyClick));
+  }
+
+  _unbindHandlers(searchButtonClick, searchFocus, windowResize, bodyClick) {
+    this.searchButton.unbind('click', searchButtonClick);
+    this.searchInput.unbind('focus', searchFocus);
+    $(this.$window).unbind('resize', windowResize);
+    $('body').unbind('click', bodyClick);
+  }
+
+  _showSearchInput(element, scope) {
+    if (!this._isSearchInputVisible) {
+      this.searchInput.animate({width: `+=${this._width(element)}`, padding: '6px 12px'}, () => {
         this.$timeout(() => scope.$ctrl.searchVisible = true);
         this.searchInput.focus();
       });
     }
   }
 
-  hideSearchInput(element, scope) {
-    if (this.isSearchInputVisible) {
-      this.searchInput.animate({ width: `-=${this.width(element)}`, padding: 0 }, () => {
+  _hideSearchInput(element, scope) {
+    if (this._isSearchInputVisible) {
+      this.searchInput.animate({ width: `-=${this._width(element)}`, padding: 0 }, () => {
         this.$timeout(() => scope.$ctrl.searchVisible = false);
         this.searchInput.blur();
       });
     }
   }
 
-  get isSearchInputVisible() {
+  _isSearchButton(target) {
+    return $(target).is(this.searchButton)
+  }
+
+  _isChildOfSearchButton(target) {
+    return this.searchButton.has(target).length > 0;
+  }
+
+  _isSearchInput(target) {
+    return $(target).is(this.searchInput);
+  }
+
+  _width(element) {
+    return $(element).width() - 80;
+  }
+
+  get _isSearchInputVisible() {
     return this.searchInput.width() > 0;
   }
 
