@@ -23,14 +23,10 @@ class MemberService extends BaseService {
     });
   }
 
-  delete(member) {
-    console.log(`Deleting Member ${JSON.stringify(member)}`);
-    return Promise.resolve();
-  }
-
   toggleAvailability(member) {
     console.log(`Toggle Availability ${JSON.stringify(member)}`);
-    return Promise.resolve();
+    member.available = !member.available;
+    return super.save({ member });
   }
 
   _wrapData(data) {

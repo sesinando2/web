@@ -7,7 +7,7 @@ class Header {
   constructor($window, $timeout) {
     this.restrict = 'E';
     this.scope = {
-      searchChanged: '&'
+      searchChanged: '<'
     };
     this.template = template;
     this.controller = controller;
@@ -21,7 +21,7 @@ class Header {
     this.link = this.link.bind(this);
   }
 
-  link(scope, element, attribute) {
+  link(scope, element) {
     this.initElements(element);
     let searchButtonClick = this.onSearchButtonClick(scope, element);
     let searchFocus = this.onSearchFocus(scope, element);
@@ -71,7 +71,8 @@ class Header {
   onSearchButtonClick(scope, element) {
     return () => {
       if (scope.$ctrl.search && this.isSearchInputVisible) {
-        this.$timeout(() => scope.$ctrl.search = null);
+        scope.$ctrl.search = null;
+        scope.$ctrl.searchChanged({ search: null });
       }
 
       if (this.isSearchInputVisible) {

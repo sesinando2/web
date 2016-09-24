@@ -1,19 +1,17 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <list-header search="$ctrl.search" search-changed="$ctrl.onSearchChanged(search)"></list-header>
+    <list-header search="$ctrl.search" search-changed="$ctrl.searchChange"></list-header>
   </div>
-  <!--<div class="panel-body">
-    {{$ctrl.search}}
-  </div>-->
   <ul class="list-group" style="max-height: 410px">
-    <li ng-repeat="data in $ctrl.data track by data.id" class="list-group-item"
+    <li ng-repeat="data in $ctrl.items track by data.id" class="list-group-item"
         ng-class="{ disabled: !$ctrl.enabled, active: $ctrl.selected == data }">
       <member item="data" enabled="$ctrl.enabled" update-list="$ctrl.refresh()"></member>
     </li>
   </ul>
 </div>
-<div class="text-center" ng-if="$ctrl.pageCount > 1">
-  <ul uib-pagination total-items="$ctrl.count" ng-model="$ctrl.currentPage" max-size="4"
-      class="pagination-sm" ng-change="$ctrl.onPageChange()" boundary-links="false" rotate="false"
-      num-pages="$ctrl.pageCount" next-text="&raquo;" previous-text="&laquo;"></ul>
+<div class="text-center" ng-if="$ctrl.pageCount > 0">
+  <ul uib-pagination total-items="$ctrl.count" ng-model="$ctrl.current" max-size="4"
+      class="pagination-sm" ng-change="$ctrl.pageChange({current: $ctrl.current})"
+      boundary-links="false" rotate="false" num-pages="$ctrl.pageCount" next-text="&raquo;"
+      previous-text="&laquo;"></ul>
 </div>

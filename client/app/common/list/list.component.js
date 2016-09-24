@@ -5,9 +5,14 @@ import './list.styl';
 let listComponent = {
   restrict: 'E',
   bindings: {
-    list:     '&',
-    register: '&',
-    enabled:  '=',
+    enabled:        '<',
+    items:          '<',
+    pageCount:      '<',
+    max:            '=',
+    current:        '=',
+    count:          '=',
+    pageChange:     '&',
+    searchChange:   '&'
   },
   template,
   controller

@@ -12,10 +12,6 @@ class BaseService {
     if (!this._wrapData) {
       throw 'this._wrapData should be implemented';
     }
-
-    if (!this._resource) {
-      throw 'this._resource should be implemented';
-    }
   }
 
   query(query) {
@@ -28,6 +24,26 @@ class BaseService {
     return new Promise((resolve, reject) => {
       this._resource.get(query, this._handleSingle(resolve), this._handle(reject));
     });
+  }
+
+  delete(object) {
+    let resource = this._createResourceFromObject(object);
+    return new Promise((resolve, reject) => {
+      resource.$delete(this._handle(resolve), this._handle(reject));
+    });
+  }
+
+  save(object) {
+    let resource = this._createResourceFromObject(object);
+    return new Promise((resolve, reject) => {
+      resource.$save(this._handleSingle(resolve), this._handle(reject));
+    });
+  }
+
+  _createResourceFromObject(object) {
+    let resource = new this._resource();
+    Object.assign(resource, object);
+    return resource;
   }
 
   _handle(handler) {

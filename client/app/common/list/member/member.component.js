@@ -6,8 +6,7 @@ let memberComponent = {
   restrict: 'E',
   bindings: {
     item:     '<',
-    enabled:  '<',
-    updateList: '&'
+    enabled:  '<'
   },
   template,
   controller

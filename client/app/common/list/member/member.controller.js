@@ -5,22 +5,6 @@ class MemberController {
     this.memberService = memberService;
   }
 
-  delete() {
-    if (!this.item.noDelete) {
-      this.memberService.delete(this.item).then(() => {
-        this.$state.transitionTo('people');
-        this.updateList();
-      });
-    }
-  }
-
-  toggleAvailability() {
-    this.memberService.toggleAvailability(this.item).then(() => {
-      this.$state.transitionTo('people.details', { id: this.item.id });
-      this.updateList();
-    });
-  }
-
   get icon() {
     return this.item.mobileAppUser ? 'phone' : 'user';
   }
