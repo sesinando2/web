@@ -5,12 +5,12 @@
   </ng-switch>
   {{$ctrl.item.name}}
   <div class="pull-right right-section">
-    <a href="" ng-click="$ctrl.toggleAvailability()"
+    <a href="" ng-click="$ctrl.item.toggleAvailability()"
        ng-class="{ 'has-default': !$ctrl.item.available, 'has-success': $ctrl.item.available, 'disabled': !$ctrl.enabled }"
        uib-tooltip="{{$ctrl.availabilityTooltip}}" tooltip-placement="left" tooltip-enable="$ctrl.enabled">
       <span class="glyphicon glyphicon-ok"></span>
     </a>
-    <a href="" ng-click="$ctrl.delete()" class="delete-button"
+    <a href="" ng-click="$ctrl.item.delete()" class="delete-button"
        ng-class="{ 'has-error': !$ctrl.item.noDelete, 'disabled': $ctrl.item.noDelete || !$ctrl.enabled }"
        uib-tooltip="Click to Delete" tooltip-enable="!$ctrl.item.noDelete && $ctrl.enabled" tooltip-placement="left">
       <span class="glyphicon glyphicon-trash"></span>

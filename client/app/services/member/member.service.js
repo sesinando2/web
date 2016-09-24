@@ -24,7 +24,6 @@ class MemberService extends BaseService {
   }
 
   toggleAvailability(member) {
-    console.log(`Toggle Availability ${JSON.stringify(member)}`);
     member.available = !member.available;
     return super.save({ member });
   }

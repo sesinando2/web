@@ -1,7 +1,8 @@
 class PeopleController {
 
   /* @ngInject */
-  constructor($timeout, memberService) {
+  constructor($state, $timeout, memberService) {
+    this.$state = $state;
     this.$timeout = $timeout;
     this.memberService = memberService;
 
@@ -13,10 +14,13 @@ class PeopleController {
     this.count = 0;
     this.current = 1;
     this.pageCount = 1;
+
+    this._delete = this._delete.bind(this);
+    this._toggleAvailability = this._toggleAvailability.bind(this);
   }
 
   $onInit() {
-    this._list(this.max, this.current, this.query);
+    this._refreshList();
   }
 
   pageChange(current) {
@@ -25,6 +29,10 @@ class PeopleController {
 
   searchChange(query) {
     this._list(this.max, this.current, query);
+  }
+
+  _refreshList() {
+    this._list(this.max, this.current, this.query);
   }
 
   _list(max, current, query) {
@@ -38,28 +46,38 @@ class PeopleController {
 
   _handleResponse(data, header) {
     this.$timeout(() => {
-      this.data = data;
+      this.data = this._bindHandlers(data);
       this.count = parseInt(header('count'));
       this.pageCount = Math.ceil(this.count / this.max);
       this.enabled = true;
     });
   }
 
-  /*delete(member) {
+  _bindHandlers(data) {
+    return data.map((member) => {
+      member.deleteHandler = this._delete;
+      member.toggleAvailabilityHandler = this._toggleAvailability;
+      return member;
+    });
+  }
+
+  _delete(member) {
     if (!member.noDelete) {
       this.enabled = false;
       this.memberService.delete(member).then(() => {
         this.$state.transitionTo('people');
+        this._refreshList();
       });
     }
   }
 
-  toggleAvailability(member) {
+  _toggleAvailability(member) {
     this.enabled = false;
     this.memberService.toggleAvailability(member).then(() => {
       this.$state.transitionTo('people.details', { id: member.id });
+      this._refreshList();
     });
-  }*/
+  }
 }
 
 export default PeopleController;
