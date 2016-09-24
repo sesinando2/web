@@ -6,7 +6,6 @@ class PeopleController {
     this.$timeout = $timeout;
     this.memberService = memberService;
 
-    this.enabled = true;
     this.query = null;
 
     this.max = 10;
