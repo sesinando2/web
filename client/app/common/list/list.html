@@ -10,7 +10,7 @@
     </li>
   </ul>
 </div>
-<div class="text-center" ng-if="$ctrl.pageCount > 0">
+<div class="text-center" ng-if="$ctrl.pageCount > 1">
   <ul uib-pagination total-items="$ctrl.count" ng-model="$ctrl.current" max-size="4"
       class="pagination-sm" ng-change="$ctrl.pageChange({current: $ctrl.current})"
       boundary-links="false" rotate="false" num-pages="$ctrl.pageCount" next-text="&raquo;"

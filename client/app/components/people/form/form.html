@@ -1,1 +1,5 @@
-<h1>People Form</h1>
+<div class="people-form" ng-if="$ctrl.selected">
+  <form name="$ctrl.form" novalidate>
+    <input type="text" ng-model="$ctrl.test" name="test">
+  </form>
+</div>

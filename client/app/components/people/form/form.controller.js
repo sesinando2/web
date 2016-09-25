@@ -1,6 +1,7 @@
 class FormController {
-  constructor() {
+  constructor($timeout) {
     this.name = 'form';
+    this.$timeout = $timeout;
   }
 
   $onInit() {

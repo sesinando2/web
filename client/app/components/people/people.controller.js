@@ -20,7 +20,19 @@ class PeopleController {
   }
 
   searchChange() {
-    this._reloadState();
+    this._refreshList();
+  }
+
+  _refreshList() {
+    this.memberService.list(this.$stateParams.max, this.$stateParams.current, this.$stateParams.query, this.accountId)
+      .then((data) => this._handleResponse(data));
+  }
+
+  _handleResponse(data) {
+    this.$timeout(() => {
+      this.data = data;
+      this._bindHandlers(data);
+    });
   }
 
   _bindHandlers(data) {
