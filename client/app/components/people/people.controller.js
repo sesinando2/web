@@ -16,28 +16,11 @@ class PeopleController {
   }
 
   pageChange() {
-    this._refreshList();
+    this._reloadState();
   }
 
   searchChange() {
-    this._refreshList();
-  }
-
-  _refreshList() {
-    this.$timeout(() =>
-      this._list(this.$stateParams.max, this.$stateParams.current, this.$stateParams.query));
-  }
-
-  _list(max, current, query) {
-    this.memberService.list(max, current, query, this.accountId)
-      .then((data) => this._handleResponse(data));
-  }
-
-  _handleResponse(data) {
-    this.$timeout(() => {
-      this._bindHandlers(data);
-      this.data = data;
-    });
+    this._reloadState();
   }
 
   _bindHandlers(data) {
@@ -49,20 +32,16 @@ class PeopleController {
 
   _delete(member) {
     if (!member.noDelete) {
-      this.$state.current.data.enabled  = false;
-      this.memberService.delete(member).then(() => {
-        this._refreshList();
-        this.$state.current.data.enabled  = true;
-      });
+      this.memberService.delete(member).then(() => this._reloadState());
     }
   }
 
   _toggleAvailability(member) {
-    this.$state.current.data.enabled  = false;
-    this.memberService.toggleAvailability(member).then(() =>  {
-      this._refreshList();
-      this.$state.current.data.enabled  = true;
-    });
+    this.memberService.toggleAvailability(member).then(() => this._reloadState());
+  }
+
+  _reloadState() {
+    this.$timeout(() => this.$state.reload());
   }
 }
 
