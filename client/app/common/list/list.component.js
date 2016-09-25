@@ -8,6 +8,7 @@ let listComponent = {
     enabled:        '<',
     items:          '<',
     pageCount:      '<',
+    selected:       '<',
     max:            '=',
     current:        '=',
     count:          '=',
