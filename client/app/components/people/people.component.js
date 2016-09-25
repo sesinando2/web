@@ -5,7 +5,8 @@ import './people.styl';
 let peopleComponent = {
   restrict: 'E',
   bindings: {
-    accountId: '<'
+    accountId: '<',
+    data: '='
   },
   template,
   controller

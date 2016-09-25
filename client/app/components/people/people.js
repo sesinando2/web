@@ -1,10 +1,10 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import peopleComponent from './people.component';
-import formTemplate from './people.form.html';
+import peopleForm from './form/form';
 
 let peopleModule = angular.module('people', [
-  uiRouter
+  uiRouter, peopleForm
 ])
 
 .config(($stateProvider) => {
@@ -18,7 +18,20 @@ let peopleModule = angular.module('people', [
         accountId: (userInfo) => {
           "ngInject";
           return userInfo.account ? userInfo.account.id : undefined;
+        },
+        data: ($stateParams, memberService, userInfo) => {
+          "ngInject";
+
+          return memberService.list($stateParams.max, $stateParams.current, $stateParams.query, userInfo.account.id);
         }
+      },
+      params: {
+        current: 1,
+        max: 10,
+        query: null,
+      },
+      data: {
+        enabled: true
       },
       onEnter: ($state, userInfo) => {
         "ngInject";
@@ -26,10 +39,6 @@ let peopleModule = angular.module('people', [
           $state.go('account');
         }
       }
-    })
-    .state('people.details', {
-      url: '/:id',
-      template: formTemplate
     });
 })
 

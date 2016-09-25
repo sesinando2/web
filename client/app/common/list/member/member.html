@@ -1,4 +1,4 @@
-<a ui-sref="people.details({ id: $ctrl.item.id })" class="member">
+<div ng-click="$ctrl.select()"  class="member">
   <ng-switch on="$ctrl.icon">
     <i class="fa fa-user" ng-switch-when="user" ng-class="$ctrl.iconCss" uib-tooltip="{{$ctrl.iconTooltip}}" tooltip-placement="right"></i>
     <span class="glyphicon glyphicon-phone" ng-switch-when="phone" ng-class="$ctrl.iconCss" uib-tooltip="{{$ctrl.iconTooltip}}" tooltip-placement="right"></span>
@@ -16,4 +16,4 @@
       <span class="glyphicon glyphicon-trash"></span>
     </a>
   </div>
-</a>
+</div>

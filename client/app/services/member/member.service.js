@@ -10,7 +10,13 @@ class MemberService extends BaseService {
   }
 
   list(max, current, query, accountId) {
-    return this.query({ offset: this._offset(current, max), max, q: query, sort: 'name', accountId });
+    return this.query({ offset: this._offset(current, max), max, q: query, sort: 'name', accountId }).then((response) => {
+      let header = response.header;
+      let items = response.data;
+      let count = parseInt(header('count'));
+      let pageCount = Math.ceil(count / max);
+      return { items, count, pageCount };
+    });
   }
 
   get(query) {

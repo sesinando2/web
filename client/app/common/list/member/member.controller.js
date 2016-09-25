@@ -5,6 +5,10 @@ class MemberController {
     this.memberService = memberService;
   }
 
+  select() {
+    this.$state.go('people.details', { id: this.item.id });
+  }
+
   get icon() {
     return this.item.mobileAppUser ? 'phone' : 'user';
   }

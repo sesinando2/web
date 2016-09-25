@@ -1,80 +1,67 @@
 class PeopleController {
 
   /* @ngInject */
-  constructor($state, $timeout, memberService) {
+  constructor($state, $stateParams, $timeout, memberService) {
     this.$state = $state;
+    this.$stateParams = $stateParams;
     this.$timeout = $timeout;
     this.memberService = memberService;
-
-    this.query = null;
-
-    this.max = 10;
-    this.data = [];
-    this.count = 0;
-    this.current = 1;
-    this.pageCount = 1;
 
     this._delete = this._delete.bind(this);
     this._toggleAvailability = this._toggleAvailability.bind(this);
   }
 
   $onInit() {
+    this._bindHandlers(this.data);
+  }
+
+  pageChange() {
     this._refreshList();
   }
 
-  pageChange(current) {
-    this._list(this.max, current, this.query);
-  }
-
-  searchChange(query) {
-    this._list(this.max, this.current, query);
+  searchChange() {
+    this._refreshList();
   }
 
   _refreshList() {
-    this._list(this.max, this.current, this.query);
+    this.$timeout(() =>
+      this._list(this.$stateParams.max, this.$stateParams.current, this.$stateParams.query));
   }
 
   _list(max, current, query) {
-    this.enabled = false;
-    return this.memberService.list(max, current, query, this.accountId).then((response) => {
-      let header = response.header;
-      let data = response.data;
-      this._handleResponse(data, header);
-    });
+    this.memberService.list(max, current, query, this.accountId)
+      .then((data) => this._handleResponse(data));
   }
 
-  _handleResponse(data, header) {
+  _handleResponse(data) {
     this.$timeout(() => {
-      this.data = this._bindHandlers(data);
-      this.count = parseInt(header('count'));
-      this.pageCount = Math.ceil(this.count / this.max);
-      this.enabled = true;
+      this._bindHandlers(data);
+      this.data = data;
     });
   }
 
   _bindHandlers(data) {
-    return data.map((member) => {
+    data.items.forEach((member) => {
       member.deleteHandler = this._delete;
       member.toggleAvailabilityHandler = this._toggleAvailability;
-      return member;
     });
   }
 
   _delete(member) {
     if (!member.noDelete) {
-      this.enabled = false;
+      this.$state.current.data.enabled  = false;
       this.memberService.delete(member).then(() => {
-        this.$state.transitionTo('people');
         this._refreshList();
+        this.$state.current.data.enabled  = true;
       });
     }
   }
 
   _toggleAvailability(member) {
-    this.enabled = false;
-    this.memberService.toggleAvailability(member).then(() => {
-      this.$state.transitionTo('people.details', { id: member.id });
+    this.$state.current.data.enabled  = false;
+    this.memberService.toggleAvailability(member).then(() =>  {
       this._refreshList();
+      this.$state.current.data.enabled  = true;
     });
   }
 }

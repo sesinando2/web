@@ -11,6 +11,7 @@ let listComponent = {
     max:            '=',
     current:        '=',
     count:          '=',
+    search:         '=',
     pageChange:     '&',
     searchChange:   '&'
   },

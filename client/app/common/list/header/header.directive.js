@@ -7,6 +7,7 @@ class Header {
   constructor($window, $timeout) {
     this.restrict = 'E';
     this.scope = {
+      search: '=',
       searchChanged: '<'
     };
     this.template = template;
