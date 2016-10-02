@@ -20,7 +20,7 @@ class PeopleController {
   }
 
   searchChange() {
-    this._refreshList();
+    this.$timeout(() => this._refreshList());
   }
 
   _refreshList() {

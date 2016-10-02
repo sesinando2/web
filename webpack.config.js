@@ -1,4 +1,5 @@
 var path    = require('path');
+var gutil   = require('gulp-util');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -38,5 +39,12 @@ module.exports = {
       $: "jquery",
       jQuery: "jquery"
     })
-  ]
+  ],
+
+  errorHandler: function (title) {
+      return function (err) {
+        gutil.log(gutil.colors.red('[' + title + ']'), err.toString());
+        this.emit('end');
+      }
+  }
 };
