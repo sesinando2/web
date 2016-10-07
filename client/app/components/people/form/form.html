@@ -1,5 +1,11 @@
 <div class="people-form" ng-if="$ctrl.selected">
   <form name="$ctrl.form" novalidate>
-    <input type="text" ng-model="$ctrl.test" name="test">
+    <person-name form="$ctrl.form"
+                 name="name"
+                 label="Name"
+                 placeholder="Name"
+                 form-data="$ctrl.formData"
+                 has-changed="$ctrl.hasPersonNameChanged()">
+    </person-name>
   </form>
 </div>

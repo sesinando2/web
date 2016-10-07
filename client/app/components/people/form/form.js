@@ -3,7 +3,7 @@ import uiRouter from 'angular-ui-router';
 import formComponent from './form.component';
 import personName from './name/name';
 
-let formModule = angular.module('form', [
+let formModule = angular.module('people.form', [
   uiRouter, personName
 ])
 

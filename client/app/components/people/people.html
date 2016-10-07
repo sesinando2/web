@@ -1,22 +1,20 @@
 <page title="People">
-  <div class="row">
-    <div class="col-md-5 col-lg-4">
-      <list
-        selected="$ctrl.$stateParams.id"
-        enabled="$ctrl.$state.$current.data.enabled"
-        items="$ctrl.data.items"
-        page-count="$ctrl.data.pageCount"
-        max="$ctrl.$stateParams.max"
-        current="$ctrl.$stateParams.current"
-        count="$ctrl.data.count"
-        search="$ctrl.$stateParams.query"
-        page-change="$ctrl.pageChange(current)"
-        search-change="$ctrl.searchChange(search)"
-      />
-    </div>
+  <div class="col-md-5 col-lg-4">
+    <list
+      selected="$ctrl.$stateParams.id"
+      enabled="$ctrl.$state.$current.data.enabled"
+      items="$ctrl.data.items"
+      page-count="$ctrl.data.pageCount"
+      max="$ctrl.$stateParams.max"
+      current="$ctrl.$stateParams.current"
+      count="$ctrl.data.count"
+      search="$ctrl.$stateParams.query"
+      page-change="$ctrl.pageChange(current)"
+      search-change="$ctrl.searchChange(search)"
+    />
+  </div>
 
-    <div class="col-md-7 col-lg-6">
-      <ui-view></ui-view>
-    </div>
+  <div class="col-md-7 col-lg-6">
+    <ui-view></ui-view>
   </div>
 </page>

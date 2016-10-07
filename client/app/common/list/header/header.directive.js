@@ -40,7 +40,7 @@ class Header {
     return () => {
       if (scope.$ctrl.search && this._isSearchInputVisible) {
         scope.$ctrl.search = null;
-        scope.$ctrl.searchChanged({ search: null });
+        this.$timeout(() => scope.$ctrl.searchChanged());
       }
 
       if (this._isSearchInputVisible) {

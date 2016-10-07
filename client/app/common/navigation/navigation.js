@@ -5,7 +5,7 @@ import ngSanitize from 'angular-sanitize';
 import MenuItem from './menuItem/menuItem';
 import navigationComponent from './navigation.component';
 
-let navigationModule = angular.module('navigation', [
+let navigationModule = angular.module('common.navigation', [
   uiRouter, ngSanitize, MenuItem
 ])
 

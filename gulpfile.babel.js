@@ -1,6 +1,7 @@
 'use strict';
 
 import gulp     from 'gulp';
+import plumber  from 'gulp-plumber';
 import webpack  from 'webpack';
 import path     from 'path';
 import sync     from 'run-sequence';
@@ -73,6 +74,7 @@ gulp.task('webpack_publish', ['clean'], (cb) => {
   config.entry.app = paths.entry;
 
   gulp.src(paths.entry)
+    .pipe(plumber())
     .pipe(webpackStream(config))
     .pipe(gulp.dest(paths.dest))
     .pipe(gulp.dest(paths.publish));
@@ -84,6 +86,7 @@ gulp.task('webpack_watch', ['clean'], (cb) => {
   config.entry.app = paths.entry;
 
   gulp.src(paths.entry)
+    .pipe(plumber())
     .pipe(webpackStream(config))
     .pipe(gulp.dest(paths.dest))
     .pipe(gulp.dest(paths.publish));

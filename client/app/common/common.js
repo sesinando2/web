@@ -1,14 +1,16 @@
 import angular from 'angular';
-import A from './a/a';
-import Page from './page/page';
-import List from './list/list';
-import Navigation from './navigation/navigation';
+import aModule from './a/a';
+import pageModule from './page/page';
+import listModule from './list/list';
+import navigationModule from './navigation/navigation';
+import formModule from './form/form';
 
 let commonModule = angular.module('app.common', [
-  A,
-  Page,
-  List,
-  Navigation
+  aModule,
+  pageModule,
+  listModule,
+  navigationModule,
+  formModule
 ])
 
 .name;

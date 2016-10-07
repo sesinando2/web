@@ -4,7 +4,14 @@ import './name.styl';
 
 let nameComponent = {
   restrict: 'E',
-  bindings: {},
+  bindings: {
+    form:         '<',
+    formData:     '<',
+    hasChanged:   '<',
+    name:         '@',
+    label:        '@',
+    placeholder:  '@'
+  },
   template,
   controller
 };

@@ -21,6 +21,10 @@ class Member {
     }
   }
 
+  clone() {
+    return new Member(this);
+  }
+
   get roles() {
     return this._roles;
   }

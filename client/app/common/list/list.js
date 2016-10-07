@@ -6,7 +6,7 @@ import member from './member/member';
 
 import listComponent from './list.component';
 
-let listModule = angular.module('list', [
+let listModule = angular.module('common.list', [
   uiRouter,
   uiBootstrap,
   header,
