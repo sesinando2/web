@@ -16,8 +16,8 @@ class ToggleButton {
     let unbindHandler = this.createUnbindHandler(element, onClickHandler);
     updateClassHandler(scope.value);
     scope.$watch('toggleButton', (value) => updateClassHandler(value));
-    element.on('click', () => onClickHandler());
-    element.on('$destroy', () => unbindHandler());
+    element.on('click', onClickHandler);
+    element.on('$destroy', unbindHandler);
   }
 
   createUnbindHandler(element, onClickHandler) {

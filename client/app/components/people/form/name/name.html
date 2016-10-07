@@ -1,12 +1,17 @@
 <!-- TODO: Cleanup Comments -->
-<hr>
 <div class="form-group people-name" ng-class="$ctrl.getCssClass()">
   <label class="control-label" ng-bind-html="$ctrl.label"></label>
   <div class="input-group">
     <span class="input-group-addon">Required</span>
     <input type="text" class="form-control" placeholder="{{$ctrl.placeholder}}" ng-model="$ctrl.formData.name" required member-name="$ctrl.name">
     <span class=input-group-btn>
-      <a href="#" type="button" class="btn no-focus btn-default"><span class="glyphicon glyphicon-phone"></span> Mobile App</a>
+      <a href="#" type="button" class="btn no-focus btn-default"
+         popover-title="Mobile App Settings"
+         popover-is-open="$ctrl.mobileConfigIsOpen"
+         popover-placement="left" mobile-app-config="$ctrl.formData.mobileAppUser"
+         uib-popover-template="'name/mobile-app-config/mobile-app-config.modal.html'">
+        <span class="glyphicon glyphicon-phone"></span> Mobile App
+      </a>
       <a href="#" type="button" class="btn no-focus" toggle-button="$ctrl.formData.available">Available</a>
     </span>
   </div>

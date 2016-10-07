@@ -1,4 +1,14 @@
+import './mobile-app-config/mobile-app-config.modal.html';
+
 class NameController {
+
+  constructor(agentRoles) {
+    this.agentRoles = agentRoles;
+  }
+
+  $onInit() {
+    this.formData.agentRole = `${this.formData.agentRole}`;
+  }
 
   getCssClass() {
     let css = [];
@@ -10,6 +20,20 @@ class NameController {
       }
     }
     return css;
+  }
+
+  getMobileAppButtonCss() {
+    let css = [];
+    if (this.formData.mobileAppUser) {
+      css.push('btn-danger');
+    } else {
+      css.push('btn-success')
+    }
+    return css;
+  }
+
+  getMobileAppButtonText() {
+    return this.formData.mobileAppUser ? 'Deactivate' : 'Activate';
   }
 
   getHelpText() {

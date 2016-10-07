@@ -1,0 +1,40 @@
+<div class="mobile-app-config">
+  <label class="control-label">Tab Privileges</label>
+  <div class="form-group form-inline">
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="service"> Service
+      </label>
+    </div>
+
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="message"> Message
+      </label>
+    </div>
+
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="map"> Map
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="role" class="control-label">User Privilege</label>
+    <select id="role" name="role" class="form-control" ng-model="$ctrl.formData.agentRole">
+      <option ng-repeat="role in $ctrl.agentRoles" value="{{role.value}}">{{role.text}}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="mobileKey" class="control-label top-margin">Mobile Key</label>
+    <input type="text" id="mobileKey" name="mobileKey" class="form-control" placeholder="Mobile Key" ng-model="selected.mobileKey" readonly="readonly">
+  </div>
+
+  <div class="form-group text-right">
+    <button type="button" class="btn btn-default top-margin"
+            ng-class="$ctrl.getMobileAppButtonCss()" ng-bind-html="$ctrl.getMobileAppButtonText()">
+    </button>
+  </div>
+</div>
