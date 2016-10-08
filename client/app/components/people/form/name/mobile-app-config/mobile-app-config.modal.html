@@ -3,19 +3,19 @@
   <div class="form-group form-inline">
     <div class="checkbox">
       <label>
-        <input type="checkbox" ng-model="service"> Service
+        <input type="checkbox" ng-model="$ctrl.formData.service"> Service
       </label>
     </div>
 
     <div class="checkbox">
       <label>
-        <input type="checkbox" ng-model="message"> Message
+        <input type="checkbox" ng-model="$ctrl.formData.message"> Message
       </label>
     </div>
 
     <div class="checkbox">
       <label>
-        <input type="checkbox" ng-model="map"> Map
+        <input type="checkbox" ng-model="$ctrl.formData.map"> Map
       </label>
     </div>
   </div>
@@ -29,7 +29,7 @@
 
   <div class="form-group">
     <label for="mobileKey" class="control-label top-margin">Mobile Key</label>
-    <input type="text" id="mobileKey" name="mobileKey" class="form-control" placeholder="Mobile Key" ng-model="selected.mobileKey" readonly="readonly">
+    <input type="text" id="mobileKey" name="mobileKey" class="form-control" placeholder="Mobile Key" ng-model="$ctrl.formData.mobileKey" readonly="readonly">
   </div>
 
   <div class="form-group text-right">
