@@ -10,6 +10,11 @@ class NameController {
     this.formData.agentRole = `${this.formData.agentRole}`;
   }
 
+  toggleMobileAppUser() {
+    this.formData.mobileAppUser = !this.formData.mobileAppUser;
+    this.mobileConfigIsOpen = false;
+  }
+
   getCssClass() {
     let css = [];
     if (this.hasChanged) {

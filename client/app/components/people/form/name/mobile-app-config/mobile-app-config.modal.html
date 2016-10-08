@@ -34,7 +34,9 @@
 
   <div class="form-group text-right">
     <button type="button" class="btn btn-default top-margin"
-            ng-class="$ctrl.getMobileAppButtonCss()" ng-bind-html="$ctrl.getMobileAppButtonText()">
+            ng-click="$ctrl.toggleMobileAppUser()"
+            ng-class="$ctrl.getMobileAppButtonCss()"
+            ng-bind-html="$ctrl.getMobileAppButtonText()">
     </button>
   </div>
 </div>
