@@ -1,0 +1,11 @@
+<div class="form-group has-feedback people-name" ng-class="$ctrl.getCssClass()">
+  <label class="control-label" ng-bind-html="$ctrl.label"></label>
+  <div class="input-group">
+    <span class="input-group-addon">Required</span>
+    <input type="email" class="form-control" placeholder="{{$ctrl.placeholder}}" ng-model="$ctrl.formData.email" ng-name="$ctrl.name" member-id="$ctrl.formData.id" required unique-email>
+    <span class="input-group-btn" ng-if="!$ctrl.formData.owner">
+      <a href="#" class="btn no-focus" type="button" toggle-button="$ctrl.formData.admin">Administrator</a>
+    </span>
+  </div>
+  <span class="help-block" ng-show="$ctrl.getHelpText()" ng-bind-html="$ctrl.getHelpText()"></span>
+</div>

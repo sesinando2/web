@@ -2,7 +2,7 @@
   <label class="control-label" ng-bind-html="$ctrl.label"></label>
   <div class="input-group">
     <span class="input-group-addon">Required</span>
-    <input type="text" class="form-control" placeholder="{{$ctrl.placeholder}}" ng-model="$ctrl.formData.name" required member-name="$ctrl.name">
+    <input type="text" class="form-control" placeholder="{{$ctrl.placeholder}}" ng-model="$ctrl.formData.name" required ng-name="$ctrl.name">
     <span class=input-group-btn>
       <a href="#" type="button" class="btn no-focus btn-default"
          popover-title="Mobile App Settings"

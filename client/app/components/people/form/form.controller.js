@@ -11,6 +11,10 @@ class FormController {
   hasPersonNameChanged() {
     return this.selected.data.name != this.formData.name;
   }
+
+  hasPersonEmailChanged() {
+    return this.selected.data.email != this.formData.email;
+  }
 }
 
 export default FormController;

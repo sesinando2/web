@@ -2,9 +2,10 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import formComponent from './form.component';
 import personName from './name/name';
+import personEmail from './email/email';
 
 let formModule = angular.module('people.form', [
-  uiRouter, personName
+  uiRouter, personName, personEmail
 ])
 
 .config(($stateProvider) => {

@@ -1,9 +1,10 @@
 import angular from 'angular';
-import Member from './member/member';
-import Profile from './profile/profile';
+import memberModule from './member/member';
+import profileModule from './profile/profile';
+import validationModule from './validation/validation';
 
 let servicesModule = angular.module('app.services', [
-  Member, Profile
+  memberModule, profileModule, validationModule
 ])
 
 .name;

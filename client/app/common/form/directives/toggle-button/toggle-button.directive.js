@@ -1,4 +1,4 @@
-class ToggleButton {
+class ToggleButtonDirective {
 
   constructor($timeout) {
     this.restrict = 'A';
@@ -41,4 +41,4 @@ class ToggleButton {
   }
 }
 
-export default ToggleButton;
+export default ToggleButtonDirective;

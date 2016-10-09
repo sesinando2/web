@@ -30,8 +30,9 @@ class MemberService extends BaseService {
   }
 
   toggleAvailability(member) {
+    let admin = member.admin;
     member.available = !member.available;
-    return super.save({ member });
+    return super.save({ member, admin });
   }
 
   _wrapData(data) {
