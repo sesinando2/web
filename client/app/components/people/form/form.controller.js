@@ -15,6 +15,10 @@ class FormController {
   hasPersonEmailChanged() {
     return this.selected.data.email != this.formData.email;
   }
+
+  hasCountryChanged() {
+    return this.selected.data.country != this.formData.country;
+  }
 }
 
 export default FormController;

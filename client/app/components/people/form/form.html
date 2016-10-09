@@ -14,5 +14,11 @@
                   form-data="$ctrl.formData"
                   has-changed="$ctrl.hasPersonEmailChanged()">
     </person-email>
+    <country-input form="$ctrl.form"
+                   name="country"
+                   label="Country"
+                   model="$ctrl.formData.country"
+                   has-changed="$ctrl.hasCountryChanged()">
+    </country-input>
   </form>
 </div>
