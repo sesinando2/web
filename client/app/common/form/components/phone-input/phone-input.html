@@ -1,0 +1,18 @@
+<div class="form-group">
+  <label class="control-label"></label>
+</div>
+
+<!-- TODO Cleanup
+<div class="form-group" ng-class="{'has-error': (updateForm.country.$viewValue != selected.country || updateForm.primaryNumber.$viewValue != selected.primaryNumber || mobileAppUser != selected.mobileAppUser) && updateForm.primaryNumber.$invalid, 'has-success': updateForm.primaryNumber.$viewValue != selected.primaryNumber && updateForm.primaryNumber.$valid, 'has-warning': updateForm.primaryNumber.$viewValue != selected.primaryNumber && updateForm.primaryNumber.$pending.uniquePhoneNumber}">
+  <label for="primaryNumber" class="control-label"><g:message code="teamMember.primaryNumber.label" default="Primary Number"/></label>
+  <div class="input-group">
+    <span class="input-group-addon" style="min-width: 82px">{{mobileAppUser ? 'Required' : 'Optional'}}</span>
+    <input type="text" id="primaryNumber" name="primaryNumber" class="form-control" placeholder="${g.message(code: 'teamMember.primaryNumber.label', default: 'Primary Number')}" ng-model="primary" phone-number="country" ng-blur="primary = updateForm.primaryNumber.$valid ? formatNumber(primary, country) : primary;" ng-change="updateForm.alternativeNumber.$validate()" member-id="memberId" ng-disabled="formLoading" ng-required="mobileAppUser">
+    <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true" ng-show="updateForm.primaryNumber.$viewValue != selected.primaryNumber && updateForm.primaryNumber.$valid"></span>
+    <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true" ng-show="(updateForm.country.$viewValue != selected.country || updateForm.primaryNumber.$viewValue != selected.primaryNumber) && updateForm.primaryNumber.$invalid"></span>
+    <span class="form-control-feedback" aria-hidden="true" ng-show="updateForm.primaryNumber.$viewValue != selected.primaryNumber && updateForm.primaryNumber.$pending.uniquePhoneNumber"><i class="fa fa-spinner faa-spin animated"></i></span>
+  </div>
+  <span class="help-block" ng-show="(updateForm.country.$viewValue != selected.country || updateForm.primaryNumber.$viewValue != selected.primaryNumber || mobileAppUser != selected.mobileAppUser) && updateForm.primaryNumber.$error.required">Mobile App Users requires a primary number.</span>
+  <span class="help-block" ng-show="(updateForm.country.$viewValue != selected.country || updateForm.primaryNumber.$viewValue != selected.primaryNumber) && updateForm.primaryNumber.$error.phoneNumber">Please enter a valid phone number. If you are entering a fixed phone number please include the area code.</span>
+  <span class="help-block" ng-show="(updateForm.country.$viewValue != selected.country || updateForm.primaryNumber.$viewValue != selected.primaryNumber) && updateForm.primaryNumber.$error.uniquePhoneNumber">This phone number has already been used by another user.</span>
+</div>-->

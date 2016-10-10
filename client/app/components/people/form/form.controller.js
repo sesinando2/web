@@ -19,6 +19,10 @@ class FormController {
   hasCountryChanged() {
     return this.selected.data.country != this.formData.country;
   }
+
+  hasPrimaryChanged() {
+    return this.selected.data.primaryNumber != this.formData.primaryNumber;
+  }
 }
 
 export default FormController;

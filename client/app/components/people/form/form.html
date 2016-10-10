@@ -21,4 +21,10 @@
                    has-changed="$ctrl.hasCountryChanged()">
     </country-input>
   </form>
+  <phone-input form="$ctrl.form"
+               name="Primary Number"
+               label="Primary Number"
+               model="$ctrl.formData.primaryNumber"
+               has-changed="$ctrl.hasPrimaryChanged()">
+  </phone-input>
 </div>
