@@ -11,7 +11,7 @@ class ValidationService {
   }
 
   validateEmail(email, data) {
-    let url = this.baseUrl + "/api/validate-email";
+    let url = `${this.baseUrl}/api/validate-email`;
     if (!data) {
       data = { email: email };
     } else {
@@ -21,14 +21,19 @@ class ValidationService {
   }
 
   validatePhoneNumber(text, region) {
-    let number = this.phoneNumberUtil.parseAndKeepRawInput(text, region);
     let isValid = false;
     try {
+      let number = this.phoneNumberUtil.parseAndKeepRawInput(text, region);
       isValid = number
         && this.phoneNumberUtil.isValidNumber(number)
         && this.phoneNumberUtil.isValidNumberForRegion(number, region);
     } catch (e) { /* Ignore */ }
     return isValid;
+  }
+
+  validateUniquePhoneNumber(phoneNumber, region, memberId) {
+    var url = `${this.baseUrl}/api/validate-phone-number`;
+    return this.$http.post(url, { phoneNumber, region, memberId });
   }
 }
 

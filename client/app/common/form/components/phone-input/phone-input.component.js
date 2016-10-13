@@ -4,6 +4,9 @@ import controller from './phone-input.controller';
 let phoneInputComponent = {
   bindings: {
     form:         '<',
+    country:      '<',
+    memberId:     '<',
+    required:     '<',
     hasChanged:   '<',
     name:         '@',
     label:        '@',

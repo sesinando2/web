@@ -1,40 +1,19 @@
-class EmailController {
-  constructor() {
-    this.name = 'email';
-  }
+import BaseInputController from '../../../../common/form/base-input.controller';
 
-  getCssClass() {
-    let css = [];
-    if (this.hasChanged) {
-      if (!this._isEmailValid()) {
-        css.push('has-error');
-      }  else {
-        css.push('has-success');
-      }
-    }
-    return css;
-  }
+class EmailController extends BaseInputController {
 
   getHelpText() {
     let helpText;
-    if (!this._isEmailValid()) {
-      if (this.emailController.$error.required) {
+    if (!this.isValid()) {
+      if (this.hasError('required')) {
         helpText = 'Please enter the member\'s email address.';
-      } else if (this.emailController.$error.email) {
+      } else if (this.hasError('email')) {
         helpText = 'Please enter a valid email address.';
-      } else if (this.emailController.$error.uniqueEmail) {
+      } else if (this.hasError('uniqueEmail')) {
         helpText = 'This email has been used by another user.';
       }
     }
     return helpText;
-  }
-
-  _isEmailValid() {
-    return this.emailController.$valid;
-  }
-
-  get emailController() {
-    return this.form[this.name];
   }
 }
 

@@ -20,11 +20,15 @@
                    model="$ctrl.formData.country"
                    has-changed="$ctrl.hasCountryChanged()">
     </country-input>
+    <phone-input form="$ctrl.form"
+                 name="primary"
+                 label="Primary Number"
+                 placeholder="Primary Number"
+                 model="$ctrl.formData.primaryNumber"
+                 country="$ctrl.formData.country"
+                 member-id="$ctrl.formData.id"
+                 required="$ctrl.formData.mobileAppUser"
+                 has-changed="$ctrl.hasPrimaryChanged()">
+    </phone-input>
   </form>
-  <phone-input form="$ctrl.form"
-               name="Primary Number"
-               label="Primary Number"
-               model="$ctrl.formData.primaryNumber"
-               has-changed="$ctrl.hasPrimaryChanged()">
-  </phone-input>
 </div>
