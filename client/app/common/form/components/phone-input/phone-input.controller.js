@@ -27,6 +27,10 @@ class PhoneInputController extends BaseInputController{
   getRequiredIndicatorText() {
     return this.required ? 'Required' : 'Optional';
   }
+
+  onBlur() {
+    this.model = this.formatService.formatToE164(this.model, this.country);
+  }
 }
 
 export default PhoneInputController;

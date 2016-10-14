@@ -10,9 +10,9 @@ class FormatService {
   formatToE164(text, region) {
     let formatted = null;
     try {
-      let phoneNumber = phoneUtil.parseAndKeepRawInput(text, region);
+      let phoneNumber = this.phoneNumberUtil.parseAndKeepRawInput(text, region);
       if (this.phoneNumberUtil.isValidNumber(phoneNumber)) {
-        return this.phoneNumberUtil.formatService(number, this.PhoneNumberFormat.E164);
+        return this.phoneNumberUtil.format(phoneNumber, this.PhoneNumberFormat.E164);
       }
     } catch (e) { /* Ignore */ }
     return formatted;
