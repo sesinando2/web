@@ -1,16 +1,65 @@
 class ValidPhoneDirective {
 
-  constructor(validationService) {
+  constructor($q, validationService) {
     this.restrict = 'A';
     this.require = 'ngModel';
 
+    this.$q = $q;
     this.validationService = validationService;
     this.link = this.link.bind(this);
   }
 
   link(scope, element, attributes, controller) {
     this.createPhoneNumberValidator(controller, scope, attributes);
+    if (attributes.primary) {
+      this.createAlternativePhoneNumberValidators(controller, scope, attributes);
+    }
+    this.setupWatchForUnique(scope, attributes, controller);
+  }
 
+  createAlternativePhoneNumberValidators(controller, scope, attributes) {
+    this.createAlternativeNumberValidator(controller, scope, attributes);
+    this.createNoPrimaryValidator(controller, scope, attributes);
+  }
+
+  createNoPrimaryValidator(controller, scope, attributes) {
+    controller.$validators.noPrimary = (modelValue) => {
+      let isValid = false;
+      let primary = scope.$eval(attributes.primary);
+      if (controller.$isEmpty(modelValue) || primary) {
+        isValid = true;
+      }
+      return isValid;
+    };
+  }
+
+  createAlternativeNumberValidator(controller, scope, attributes) {
+    controller.$validators.alternativeNumber = (modelValue, viewValue) => {
+      let isValid = true;
+      if (!controller.$isEmpty(modelValue)) {
+        let primary = scope.$eval(attributes.primary);
+        if (primary && primary === viewValue) {
+          isValid = false;
+        }
+      }
+      return isValid;
+    };
+  }
+
+  createPhoneNumberValidator(controller, scope, attributes) {
+    controller.$validators.phoneNumber = (modelValue, viewValue) => {
+      let isValid = false;
+      if (controller.$isEmpty(modelValue)) {
+        isValid = true;
+      } else {
+        let country = scope.$eval(attributes.validPhoneNumber);
+        isValid = this.validationService.validatePhoneNumber(viewValue, country);
+      }
+      return isValid;
+    };
+  }
+
+  setupWatchForUnique(scope, attributes, controller) {
     scope.$watch(attributes.unique, (unique) => {
       if (unique) {
         this.createUniquePhoneNumberValidator(controller, scope, attributes);
@@ -20,38 +69,24 @@ class ValidPhoneDirective {
     });
   }
 
-  createPhoneNumberValidator(controller, scope, attributes) {
-    controller.$validators.phoneNumber = (modelValue, viewValue) => {
-      if (controller.$isEmpty(modelValue)) {
-        return true;
-      }
-
-      let country = scope.$eval(attributes.validPhoneNumber);
-      return this.validationService.validatePhoneNumber(viewValue, country);
-    };
-  }
-
   createUniquePhoneNumberValidator(controller, scope, attributes) {
     if (!controller.$asyncValidators.uniquePhoneNumber) {
       controller.$asyncValidators.uniquePhoneNumber = (modelValue) => {
-        if (controller.$isEmpty(modelValue)) {
-          return Promise.resolve();
-        }
-
-        let memberId = scope.$eval(attributes.memberId);
-        let country = scope.$eval(attributes.validPhoneNumber);
-
-        if (country) {
-          return this.validateUniquePhoneNumber(modelValue, country, memberId);
-        }
-
-        return Promise.reject();
+        return new Promise((resolve, reject) => {
+          if (controller.$isEmpty(modelValue)) {
+            resolve();
+          } else {
+            this.validateUniquePhoneNumber(scope, attributes, modelValue, resolve, reject);
+          }
+        });
       };
     }
   }
 
-  validateUniquePhoneNumber(modelValue, country, memberId) {
-    return new Promise((resolve, reject) => {
+  validateUniquePhoneNumber(scope, attributes, modelValue, resolve, reject) {
+    let country = scope.$eval(attributes.validPhoneNumber);
+    if (country) {
+      let memberId = scope.$eval(attributes.memberId);
       this.validationService.validateUniquePhoneNumber(modelValue, country, memberId)
         .then((response) => {
           if (response && response.data && response.data.success === true) {
@@ -59,8 +94,8 @@ class ValidPhoneDirective {
           } else {
             reject();
           }
-        });
-    });
+        }, () => reject());
+    }
   }
 
   removeUniquePhoneNumberValidator(controller) {

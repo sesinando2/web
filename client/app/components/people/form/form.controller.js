@@ -8,20 +8,16 @@ class FormController {
     this.formData = this.selected.data.clone();
   }
 
-  hasPersonNameChanged() {
-    return this.selected.data.name != this.formData.name;
-  }
-
-  hasPersonEmailChanged() {
-    return this.selected.data.email != this.formData.email;
-  }
-
-  hasCountryChanged() {
-    return this.selected.data.country != this.formData.country;
-  }
-
-  hasPrimaryChanged() {
-    return this.selected.data.primaryNumber != this.formData.primaryNumber;
+  hasChanged(field) {
+    let original = this.selected.data[field];
+    let formValue = this.formData[field];
+    let hasValueChanged = true;
+    if (!original && !formValue) {
+      hasValueChanged = false;
+    } else if (original && formValue) {
+      hasValueChanged = (original != formValue);
+    }
+    return hasValueChanged;
   }
 }
 

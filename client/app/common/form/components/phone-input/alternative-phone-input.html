@@ -1,0 +1,12 @@
+<div class="form-group form-input" ng-class="$ctrl.getCssClass()">
+  <label class="control-label">Primary Number</label>
+  <div class="input-group">
+    <span class="input-group-addon required-indicator"
+          ng-bind-html="$ctrl.getRequiredIndicatorText()">
+    </span>
+    <input type="text" class="form-control" placeholder="{{$ctrl.placeholder}}"
+           ng-model="$ctrl.model" ng-required="$ctrl.required" ng-name="$ctrl.name"
+           valid-phone-number="$ctrl.country" unique="true" member-id="$ctrl.memberId" primary="$ctrl.primary">
+  </div>
+  <span class="help-block" ng-if="$ctrl.getHelpText()" ng-bind-html="$ctrl.getHelpText()"></span>
+</div>

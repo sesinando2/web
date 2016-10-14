@@ -5,20 +5,20 @@
                  label="Name"
                  placeholder="Name"
                  form-data="$ctrl.formData"
-                 has-changed="$ctrl.hasPersonNameChanged()">
+                 has-changed="$ctrl.hasChanged('name')">
     </person-name>
     <person-email form="$ctrl.form"
                   name="email"
                   label="Email"
                   placeholder="Email"
                   form-data="$ctrl.formData"
-                  has-changed="$ctrl.hasPersonEmailChanged()">
+                  has-changed="$ctrl.hasChanged('email')">
     </person-email>
     <country-input form="$ctrl.form"
                    name="country"
                    label="Country"
                    model="$ctrl.formData.country"
-                   has-changed="$ctrl.hasCountryChanged()">
+                   has-changed="$ctrl.hasChanged('country')">
     </country-input>
     <phone-input form="$ctrl.form"
                  name="primary"
@@ -28,7 +28,18 @@
                  country="$ctrl.formData.country"
                  member-id="$ctrl.formData.id"
                  required="$ctrl.formData.mobileAppUser"
-                 has-changed="$ctrl.hasPrimaryChanged()">
+                 has-changed="$ctrl.hasChanged('primaryNumber')">
     </phone-input>
+    <alternative-phone-input form="$ctrl.form"
+                             name="alternative"
+                             label="Alternative Number"
+                             placeholder="Alternative Number"
+                             model="$ctrl.formData.alternativeNumber"
+                             country="$ctrl.formData.country"
+                             primary="$ctrl.formData.primaryNumber"
+                             member-id="$ctrl.formData.id"
+                             required="false"
+                             has-changed="$ctrl.hasChanged('alternativeNumber')">
+    </alternative-phone-input>
   </form>
 </div>

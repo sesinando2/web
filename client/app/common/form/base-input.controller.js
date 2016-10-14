@@ -7,12 +7,10 @@ class BaseInputController {
 
   getCssClass() {
     let css = [];
-    if (this.hasChanged) {
-      if (!this.isValid()) {
-        css.push('has-error');
-      } else {
-        css.push('has-success');
-      }
+    if (!this.isValid()) {
+      css.push('has-error');
+    } else if(this.hasChanged) {
+      css.push('has-success');
     }
     return css;
   }
