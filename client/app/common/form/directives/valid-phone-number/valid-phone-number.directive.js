@@ -10,11 +10,76 @@ class ValidPhoneDirective {
   }
 
   link(scope, element, attributes, controller) {
+    this.setupValidators(controller, scope, attributes);
+    this.setupWatchForUnique(scope, attributes, controller);
+    this.allowOnlyPhoneNumberCharacters(element);
+  }
+
+  allowOnlyPhoneNumberCharacters(element) {
+    this.isCommand = false;
+    let onKeydown = this.createOnKeydown();
+    let onKeyup = this.createOnKeyup();
+    element.on('keydown', onKeydown);
+    element.on('keyup', onKeyup);
+    element.on('$destroy', () => {
+      element.unbind('keydown', onKeydown);
+      element.unbind('keyup', onKeyup);
+    });
+  }
+
+  createOnKeydown() {
+    return (event) => {
+      if (this.isCommandKey(event)) {
+        this.isCommand = true;
+      }
+      if (!this.isNumeric(event.which)
+        && !this.isPlus(event.which)
+        && !this.isArrowKey(event.which)
+        && !this.isDelete(event.which)
+        && !this.isCopy(event)) {
+
+        event.preventDefault();
+      }
+    };
+  }
+
+  createOnKeyup() {
+    return (event) => {
+      if (this.isCommandKey(event)) {
+        this.isCommand = false;
+      }
+    };
+  }
+
+  isCommandKey(event) {
+    return [224, 17, 91, 93].includes(event.which);
+  }
+
+  isNumeric(keycode) {
+    return keycode >= 48 && keycode <= 57;
+  }
+
+  isPlus(keycode) {
+    return [187, 107].includes(keycode);
+  }
+
+  isArrowKey(keycode) {
+    return keycode >= 37 && keycode <= 40;
+  }
+
+  isDelete(keycode) {
+    return [8, 46].includes(keycode);
+  }
+
+  isCopy(event) {
+    return event.which == 67 && (event.ctrlKey || this.isCommand);
+  }
+
+  setupValidators(controller, scope, attributes) {
     this.createPhoneNumberValidator(controller, scope, attributes);
     if (attributes.primary) {
       this.createAlternativePhoneNumberValidators(controller, scope, attributes);
     }
-    this.setupWatchForUnique(scope, attributes, controller);
   }
 
   createAlternativePhoneNumberValidators(controller, scope, attributes) {
