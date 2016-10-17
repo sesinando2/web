@@ -1,6 +1,7 @@
 import './form.styl';
 
 import angular from 'angular';
+import listInputModule from './components/list-input/list-input';
 import ToggleButtonDirective from './directives/toggle-button/toggle-button.directive';
 import UniqueEmail from './directives/unique-email/unique-email.directive';
 import NgName from './directives/ng-name/ng-name.directive';
@@ -9,7 +10,9 @@ import countryInput from './components/country-input/country-input.component';
 import phoneInput from './components/phone-input/phone-input.component';
 import alternativePhoneInput from './components/phone-input/alternative-phone-input.component';
 
-let formModule = angular.module('common.form', [])
+let formModule = angular.module('common.form', [
+    listInputModule
+  ])
 
   .directive('toggleButton', ($timeout) => {
     "ngInject";

@@ -7,10 +7,12 @@ class BaseInputController {
 
   getCssClass() {
     let css = [];
-    if (!this.isValid()) {
+    if (this.isInvalid()) {
       css.push('has-error');
-    } else if(this.hasChanged) {
+    } else if(this.isValid() && this.hasChanged) {
       css.push('has-success');
+    } else if (this.isPending()) {
+      css.push('has-warning');
     }
     return css;
   }
@@ -29,6 +31,14 @@ class BaseInputController {
 
   isValid() {
     return this.controller && this.controller.$valid;
+  }
+
+  isInvalid() {
+    return this.controller && this.controller.$invalid;
+  }
+
+  isPending() {
+    return this.controller && this.controller.$pending;
   }
 
   hasError(error) {

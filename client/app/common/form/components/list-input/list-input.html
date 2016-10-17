@@ -1,0 +1,25 @@
+<div class="list-input panel panel-default">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-xs-6" ng-bind-html="$ctrl.label"></div>
+      <div class="col-xs-6 text-right">
+        <a href="">
+          <span class="glyphicon glyphicon-plus"></span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-body" ng-if="!$ctrl.hasSelected()">
+    <div class="alert alert-warning" role="alert" ng-bind-html="$ctrl.emptySelectionText"></div>
+  </div>
+
+  <div class="list-group" ng-if="$ctrl.hasSelected()">
+    <li class="list-group-item" ng-repeat="item in $ctrl.selected | orderBy:'name'">
+      <span ng-bind-html="item.name"></span>
+      <a href="" class="pull-right has-error" uib-tooltip="{{$ctrl.tooltipText}}" tooltip-placement="left">
+        <span class="glyphicon glyphicon-trash"></span>
+      </a>
+    </li>
+  </div>
+</div>

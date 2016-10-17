@@ -41,5 +41,12 @@
                              required="false"
                              has-changed="$ctrl.hasChanged('alternativeNumber')">
     </alternative-phone-input>
+    <list-input label="Roles"
+                tooltip-text="Remove Role"
+                empty-selection-text="No role assigned."
+                selected="$ctrl.formData.profiles"
+                added="$ctrl.formData.added"
+                removed="$ctrl.formData.removed">
+    </list-input>
   </form>
 </div>

@@ -5,7 +5,7 @@ import './page.styl';
 let pageComponent = {
   restrict: 'E',
   bindings: {
-    title: '@'
+    pageTitle: '@'
   },
   template,
   controller,
