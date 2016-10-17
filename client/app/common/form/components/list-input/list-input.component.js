@@ -6,6 +6,7 @@ let listInputComponent = {
   bindings: {
     label:              '@',
     tooltipText:        '@',
+    addModalTitle:      '@',
     emptySelectionText: '@',
     selected:           '=',
     added:              '=',

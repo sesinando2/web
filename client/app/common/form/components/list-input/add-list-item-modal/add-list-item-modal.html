@@ -1,0 +1,59 @@
+<div class="modal-header">
+  <h3 class="modal-title" ng-bind-html="$ctrl.title"></h3>
+</div>
+<div class="modal-body">
+  <div id="accordion" class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="row">
+          <div class="col-xs-3">
+            <h5 class="panel-title" style="line-height: 34px">
+              <a data-toggle="collapse" href="#available">Available</a>
+            </h5>
+          </div>
+          <div class="col-xs-9">
+            <div class="input-group">
+              <span class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+              <input type="text" class="form-control" placeholder="Search" ng-model="aq" ng-model-options="{ debounce: 500 }">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="available" class="panel-collapse collapse in">
+        <div class="panel-body" ng-show="available.length == 0">
+          <div class="alert alert-warning" role="alert" >None available.</div>
+        </div>
+        <div class="list-group" style="max-height: 225px; overflow: auto" on-bottom-reached="loadMore()" ng-hide="available.length == 0">
+          <a href="" class="list-group-item" ng-repeat="p in available | orderBy:'name'" ng-click="select(p)" ng-class="{disabled: saving}">
+            {{p.name}}
+          </a>
+          <li class="list-group-item" ng-show="isLoadingMore"><i class="fa fa-spinner faa-spin animated"></i> Loading more members...</li>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default" ng-hide="selected.length == 0">
+      <div class="panel-heading">
+        <h5 class="panel-title" style="line-height: 34px">
+          <a data-toggle="collapse" href="#selected">Selected</a>
+        </h5>
+      </div>
+      <div id="selected" class="panel-collapse collapse in">
+        <div class="panel-body" ng-show="selected.length == 0">
+          <div class="alert alert-warning" role="alert">None selected.</div>
+        </div>
+        <ul class="list-group" style="max-height: 225px; overflow: auto" ng-hide="selected.length == 0">
+          <li class="list-group-item" ng-repeat="p in selected | orderBy:'name' | filter:selectedFilter" ng-click="unselect(p)" ng-class="{disabled: saving}">
+            {{p.name}}
+            <a href="" class="pull-right has-error">
+              <span class="glyphicon glyphicon-trash" tooltip title="Unselect Role" data-placement="left"></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" type="button" ng-click="ok()" ng-disabled="saving || selected.length == 0">OK</button>
+  <button class="btn btn-danger" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+</div>
