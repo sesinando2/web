@@ -8,11 +8,11 @@ class ProfileService extends BaseService {
     super($resource, baseUrl);
   }
 
-  getAvailable(notIn, added, deleted) {
+  getAvailable(notIn, added, removed) {
     return this.query({
       notIn:   notIn,
-      added:   added,
-      deleted: deleted
+      added:   added.map((p) => p.id),
+      deleted: removed.map((p) => p.id)
     });
   }
 

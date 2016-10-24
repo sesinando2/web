@@ -17,7 +17,7 @@
   <div class="list-group" ng-if="$ctrl.hasSelected()">
     <li class="list-group-item" ng-repeat="item in $ctrl.selected | orderBy:'name'">
       <span ng-bind-html="item.name"></span>
-      <a href="" class="pull-right has-error" uib-tooltip="{{$ctrl.tooltipText}}" tooltip-placement="left">
+      <a href="" class="pull-right has-error" uib-tooltip="{{$ctrl.tooltipText}}" tooltip-placement="left" ng-click="$ctrl.remove(item)">
         <span class="glyphicon glyphicon-trash"></span>
       </a>
     </li>

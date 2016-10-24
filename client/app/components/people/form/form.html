@@ -41,6 +41,12 @@
                              required="false"
                              has-changed="$ctrl.hasChanged('alternativeNumber')">
     </alternative-phone-input>
+    {{$ctrl.formData.profiles}}
+    <hr>
+    {{$ctrl.added}}
+    <hr>
+    {{$ctrl.removed}}
+    <hr>
     <list-input label="Roles"
                 tooltip-text="Remove Role"
                 add-modal-title="Assign to {{$ctrl.formData.name}}"

@@ -1,6 +1,3 @@
-import controller from './add-list-item-modal/add-list-item-modal.controller';
-import template from './add-list-item-modal/add-list-item-modal.html';
-
 class ListInputController {
 
   /* @ngInject */
@@ -16,13 +13,27 @@ class ListInputController {
         title:    () => this.addModalTitle,
         notIn:    () => this.notIn,
         added:    () => this.added,
-        deleted:  () => this.deleted
+        removed:  () => this.removed
       }
+    }).result.then((selected) => {
+      console.log(selected);
+    }, () => {
+      console.log('blah');
     });
   }
 
   hasSelected() {
     return this.selected && this.selected.length > 0;
+  }
+
+  remove(item) {
+    if (this.selected.includes(item)) {
+      this.selected.splice(this.selected.indexOf(item), 1);
+    }
+
+    if (!this.removed.includes(item)) {
+      this.removed.push(item);
+    }
   }
 }
 

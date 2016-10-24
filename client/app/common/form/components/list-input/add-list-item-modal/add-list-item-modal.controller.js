@@ -20,12 +20,12 @@ class AddListItemModalController {
   }
 
   getAvailable() {
-    this.profileService.getAvailable(this.resolve.notIn, this.resolve.added, this.resolve.deleted)
+    this.profileService.getAvailable(this.resolve.notIn, this.resolve.added, this.resolve.removed)
       .then((response) => this._handleListResponse(response));
   }
 
   ok() {
-    this.close(this.selected);
+    this.close({$value: this.selected});
   }
 
   cancel() {
@@ -34,12 +34,11 @@ class AddListItemModalController {
 
   filter(item) {
     var re = new RegExp("^(\\w+[\\s-_])*" + this.search, 'i');
-    return !this.search || re.test(item.name);
+    return (!this.search || re.test(item.name)) && !this.selected.includes(item);
   }
 
   select(item) {
     if (!this.selected.includes(item)) {
-      this.available.splice(this.available.indexOf(item), 1);
       this.selected.push(item);
     }
   }
@@ -47,7 +46,6 @@ class AddListItemModalController {
   unselect(item) {
     if (this.selected.includes(item)) {
       this.selected.splice(this.selected.indexOf(item), 1);
-      this.available.push(item);
     }
   }
 
