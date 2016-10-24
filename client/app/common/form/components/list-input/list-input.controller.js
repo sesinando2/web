@@ -10,11 +10,13 @@ class ListInputController {
 
   addItem() {
     this.$uibModal.open({
-      controller,
-      template,
+      component: 'addListItemModal',
       controllerAs: '$ctrl',
       resolve: {
-        title: () => this.addModalTitle
+        title:    () => this.addModalTitle,
+        notIn:    () => this.notIn,
+        added:    () => this.added,
+        deleted:  () => this.deleted
       }
     });
   }

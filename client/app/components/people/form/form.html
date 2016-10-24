@@ -45,9 +45,10 @@
                 tooltip-text="Remove Role"
                 add-modal-title="Assign to {{$ctrl.formData.name}}"
                 empty-selection-text="No role assigned."
+                not-in="$ctrl.formData.id"
                 selected="$ctrl.formData.profiles"
-                added="$ctrl.formData.added"
-                removed="$ctrl.formData.removed">
+                added="$ctrl.added"
+                removed="$ctrl.removed">
     </list-input>
   </form>
 </div>

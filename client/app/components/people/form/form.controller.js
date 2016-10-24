@@ -2,6 +2,8 @@ class FormController {
   constructor($timeout) {
     this.$timeout = $timeout;
     this.formData = null;
+    this.added = [];
+    this.deleted = [];
   }
 
   $onInit() {

@@ -8,6 +8,7 @@ let listInputComponent = {
     tooltipText:        '@',
     addModalTitle:      '@',
     emptySelectionText: '@',
+    notIn:              '<',
     selected:           '=',
     added:              '=',
     removed:            '=',
