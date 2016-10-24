@@ -8,6 +8,14 @@ class ProfileService extends BaseService {
     super($resource, baseUrl);
   }
 
+  getAvailable(notIn, added, deleted) {
+    return this.query({
+      notIn:   notIn,
+      added:   added,
+      deleted: deleted
+    });
+  }
+
   _wrapData(data) {
     return new Profile(data);
   }
