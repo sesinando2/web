@@ -9,6 +9,7 @@ let listInputComponent = {
     addModalTitle:      '@',
     emptySelectionText: '@',
     notIn:              '<',
+    original:           '<',
     selected:           '=',
     added:              '=',
     removed:            '=',
