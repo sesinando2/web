@@ -4,6 +4,8 @@ class FormController {
     this.formData = null;
     this.added = [];
     this.removed = [];
+    this.isSaving = false;
+    this.isDeleting = false;
   }
 
   $onInit() {
@@ -20,6 +22,14 @@ class FormController {
       hasValueChanged = (original != formValue);
     }
     return hasValueChanged;
+  }
+
+  hasRoleChanged() {
+    return this.added.length > 0 || this.removed.length > 0;
+  }
+
+  isFormLoading() {
+    return this.isSaving || this.isDeleting;
   }
 }
 

@@ -5,6 +5,7 @@
                  label="Name"
                  placeholder="Name"
                  form-data="$ctrl.formData"
+                 disabled="$ctrl.isFormLoading()"
                  has-changed="$ctrl.hasChanged('name')">
     </person-name>
     <person-email form="$ctrl.form"
@@ -12,12 +13,14 @@
                   label="Email"
                   placeholder="Email"
                   form-data="$ctrl.formData"
+                  disabled="$ctrl.isFormLoading()"
                   has-changed="$ctrl.hasChanged('email')">
     </person-email>
     <country-input form="$ctrl.form"
                    name="country"
                    label="Country"
                    model="$ctrl.formData.country"
+                   disabled="$ctrl.isFormLoading()"
                    has-changed="$ctrl.hasChanged('country')">
     </country-input>
     <phone-input form="$ctrl.form"
@@ -25,6 +28,7 @@
                  label="Primary Number"
                  placeholder="Primary Number"
                  model="$ctrl.formData.primaryNumber"
+                 disabled="$ctrl.isFormLoading()"
                  country="$ctrl.formData.country"
                  member-id="$ctrl.formData.id"
                  required="$ctrl.formData.mobileAppUser"
@@ -35,18 +39,13 @@
                              label="Alternative Number"
                              placeholder="Alternative Number"
                              model="$ctrl.formData.alternativeNumber"
+                             disabled="$ctrl.isFormLoading()"
                              country="$ctrl.formData.country"
                              primary="$ctrl.formData.primaryNumber"
                              member-id="$ctrl.formData.id"
                              required="false"
                              has-changed="$ctrl.hasChanged('alternativeNumber')">
     </alternative-phone-input>
-    {{$ctrl.formData.profiles}}
-    <hr>
-    {{$ctrl.added}}
-    <hr>
-    {{$ctrl.removed}}
-    <hr>
     <list-input label="Roles"
                 tooltip-text="Remove Role"
                 add-modal-title="Assign to {{$ctrl.formData.name}}"
@@ -55,7 +54,16 @@
                 original="$ctrl.selected.data.profiles"
                 selected="$ctrl.formData.profiles"
                 added="$ctrl.added"
-                removed="$ctrl.removed">
+                removed="$ctrl.removed"
+                disabled="$ctrl.isFormLoading()">
     </list-input>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary pull-right">
+        <span><i class="fa fa-spinner faa-spin animated" ng-show="$ctrl.isSaving"></i></span> Update
+      </button>
+      <button class="btn btn-danger pull-right">
+        <span><i class="fa fa-spinner faa-spin animated" ng-show="$ctrl.isDeleting"></i></span> Delete
+      </button>
+    </div>
   </form>
 </div>

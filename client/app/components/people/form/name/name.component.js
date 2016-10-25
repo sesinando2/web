@@ -7,6 +7,7 @@ let nameComponent = {
   bindings: {
     form:         '<',
     formData:     '<',
+    disabled:     '<',
     hasChanged:   '<',
     name:         '@',
     label:        '@',

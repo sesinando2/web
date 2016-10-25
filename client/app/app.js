@@ -2,6 +2,7 @@ window._ = require('underscore');
 
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
+import animate from 'angular-animate'
 import Common from './common/common';
 import Components from './components/components';
 import Services from './services/services';
@@ -14,6 +15,7 @@ import 'startbootstrap-sb-admin-2/dist/css/timeline.css';
 import 'startbootstrap-sb-admin-2/dist/css/sb-admin-2.css';
 import 'startbootstrap-sb-admin-2/bower_components/morrisjs/morris.css';
 import 'font-awesome/css/font-awesome.min.css';
+import 'font-awesome-animation/dist/font-awesome-animation.css';
 
 import 'startbootstrap-sb-admin-2/bower_components/jquery/dist/jquery.min';
 import 'jquery-ui'
@@ -23,6 +25,7 @@ import 'startbootstrap-sb-admin-2/dist/js/sb-admin-2';
 
 angular.module('app', [
     uiRouter,
+    animate,
     Common,
     Components,
     Services
