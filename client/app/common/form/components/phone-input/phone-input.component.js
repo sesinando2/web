@@ -7,6 +7,7 @@ let phoneInputComponent = {
     country:      '<',
     memberId:     '<',
     required:     '<',
+    disabled:     '<',
     hasChanged:   '<',
     name:         '@',
     label:        '@',

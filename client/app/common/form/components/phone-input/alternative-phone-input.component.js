@@ -8,6 +8,7 @@ let alternativePhoneInputComponent = {
     primary:      '<',
     memberId:     '<',
     required:     '<',
+    disabled:     '<',
     hasChanged:   '<',
     name:         '@',
     label:        '@',

@@ -1,6 +1,6 @@
 <div class="form-group">
   <label class="control-label" ng-bind-html="$ctrl.label"></label>
-  <select class="form-control" ng-model="$ctrl.model" ng-name="$ctrl.name">
+  <select class="form-control" ng-model="$ctrl.model" ng-name="$ctrl.name" ng-disabled="$ctrl.disabled">
     <option ng-repeat="country in $ctrl.countries" value="{{country.value}}">{{country.text}}</option>
   </select>
 </div>

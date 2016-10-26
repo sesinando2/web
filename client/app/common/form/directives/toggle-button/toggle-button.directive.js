@@ -3,6 +3,7 @@ class ToggleButtonDirective {
   constructor($timeout) {
     this.restrict = 'A';
     this.scope = {
+      ngDisabled:   '<',
       toggleButton: '='
     };
 
@@ -25,7 +26,11 @@ class ToggleButtonDirective {
   }
 
   createOnClickHandler(scope) {
-    return () => this.$timeout(() => scope.toggleButton = !scope.toggleButton);
+    return () => {
+      if (!scope.ngDisabled) {
+        this.$timeout(() => scope.toggleButton = !scope.toggleButton);
+      }
+    }
   }
 
   createUpdateClassesHandler(element) {

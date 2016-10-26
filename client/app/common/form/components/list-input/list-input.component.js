@@ -10,6 +10,7 @@ let listInputComponent = {
     emptySelectionText: '@',
     notIn:              '<',
     original:           '<',
+    disabled:           '<',
     selected:           '=',
     added:              '=',
     removed:            '=',

@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-xs-6" ng-bind-html="$ctrl.label"></div>
       <div class="col-xs-6 text-right">
-        <a href="" ng-click="$ctrl.addItem()">
+        <a href="" ng-click="$ctrl.addItem()" ng-class="$ctrl.getDisabledCss()">
           <span class="glyphicon glyphicon-plus"></span>
         </a>
       </div>
@@ -15,9 +15,10 @@
   </div>
 
   <div class="list-group" ng-if="$ctrl.hasSelected()">
-    <li class="list-group-item" ng-repeat="item in $ctrl.selected | orderBy:'name'">
+    <li class="list-group-item" ng-repeat="item in $ctrl.selected | orderBy:'name'" ng-class="$ctrl.getDisabledCss()">
       <span ng-bind-html="item.name"></span>
-      <a href="" class="pull-right has-error" uib-tooltip="{{$ctrl.tooltipText}}" tooltip-placement="left" ng-click="$ctrl.remove(item)">
+      <a href="" class="pull-right has-error" ng-class="$ctrl.getDisabledCss()"
+         uib-tooltip="{{$ctrl.tooltipText}}" tooltip-placement="left" ng-click="$ctrl.remove(item)">
         <span class="glyphicon glyphicon-trash"></span>
       </a>
     </li>

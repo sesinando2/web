@@ -31,6 +31,20 @@ class FormController {
   isFormLoading() {
     return this.isSaving || this.isDeleting;
   }
+
+  update() {
+    this.isSaving = true;
+    this.$timeout(() => {
+      this.isSaving = false;
+    }, 5000);
+  }
+
+  delete() {
+    this.isDeleting = true;
+    this.$timeout(() => {
+      this.isDeleting = false;
+    }, 5000);
+  }
 }
 
 export default FormController;

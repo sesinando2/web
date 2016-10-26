@@ -6,15 +6,17 @@ class ListInputController {
   }
 
   addItem() {
-    this.$uibModal.open({
-      component: 'addListItemModal',
-      resolve: {
-        title:    () => this.addModalTitle,
-        notIn:    () => this.notIn,
-        added:    () => this.added,
-        removed:  () => this.removed
-      }
-    }).result.then((selected) => this._handleModalResult(selected));
+    if (!this.disabled) {
+      this.$uibModal.open({
+        component: 'addListItemModal',
+        resolve: {
+          title:    () => this.addModalTitle,
+          notIn:    () => this.notIn,
+          added:    () => this.added,
+          removed:  () => this.removed
+        }
+      }).result.then((selected) => this._handleModalResult(selected));
+    }
   }
 
   hasSelected() {
@@ -22,12 +24,18 @@ class ListInputController {
   }
 
   remove(item) {
-    if (this._isItemIn(this.added, item)) {
-      this._removeFromArray(this.added, item)
-    } else {
-      this._pushToArray(this.removed, item)
+    if (!this.disabled) {
+      if (this._isItemIn(this.added, item)) {
+        this._removeFromArray(this.added, item)
+      } else {
+        this._pushToArray(this.removed, item)
+      }
+      this._removeFromArray(this.selected, item);
     }
-    this._removeFromArray(this.selected, item);
+  }
+
+  getDisabledCss() {
+    return { disabled: this.disabled };
   }
 
   _isItemIn(array, item) {

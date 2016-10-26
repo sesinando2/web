@@ -7,6 +7,7 @@ let emailComponent = {
   bindings: {
     form:         '<',
     formData:     '<',
+    disabled:     '<',
     hasChanged:   '<',
     name:         '@',
     label:        '@',

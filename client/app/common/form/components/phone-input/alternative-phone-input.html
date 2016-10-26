@@ -4,7 +4,7 @@
     <span class="input-group-addon required-indicator"
           ng-bind-html="$ctrl.getRequiredIndicatorText()">
     </span>
-    <input type="text" class="form-control" placeholder="{{$ctrl.placeholder}}"
+    <input type="text" class="form-control" placeholder="{{$ctrl.placeholder}}" ng-disabled="$ctrl.disabled"
            ng-blur="$ctrl.onBlur()" ng-model="$ctrl.model" ng-required="$ctrl.required" ng-name="$ctrl.name"
            valid-phone-number="$ctrl.country" unique="true" member-id="$ctrl.memberId" primary="$ctrl.primary">
   </div>

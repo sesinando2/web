@@ -4,6 +4,7 @@ import controller from './country-input.controller';
 let countryInputComopnent = {
   bindings: {
     form:         '<',
+    disabled:     '<',
     hasChanged:   '<',
     name:         '@',
     label:        '@',
