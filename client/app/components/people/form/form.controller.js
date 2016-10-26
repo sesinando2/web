@@ -1,15 +1,20 @@
 class FormController {
-  constructor($timeout) {
-    this.$timeout = $timeout;
+
+  /* @ngInject */
+  constructor($state, $timeout, memberService) {
     this.formData = null;
     this.added = [];
     this.removed = [];
     this.isSaving = false;
     this.isDeleting = false;
+    this.$state = $state;
+    this.$timeout = $timeout;
+    this.memberService = memberService;
   }
 
   $onInit() {
     this.formData = this.selected.data.clone();
+    this.deleteable = this.selected.header('no-delete') !== 'true';
   }
 
   hasChanged(field) {
@@ -28,22 +33,39 @@ class FormController {
     return this.added.length > 0 || this.removed.length > 0;
   }
 
+  hasFormChanged() {
+    return ['name', 'email', 'country', 'primaryNumber', 'alternativeNumber', 'available', 'admin',
+        'map', 'message', 'service', 'mobileAppUser']
+      .reduce((previous, field) => {
+        return this.hasChanged(field) || previous;
+      }, false) || this.hasRoleChanged();
+  }
+
   isFormLoading() {
     return this.isSaving || this.isDeleting;
   }
 
   update() {
-    this.isSaving = true;
-    this.$timeout(() => {
-      this.isSaving = false;
-    }, 5000);
+    if (this.isUpdateadble()) {
+      this.isSaving = true;
+      this.memberService.save(this.formData, this.added, this.removed)
+        .then(() => {
+          this.$state.reload();
+        });
+    }
   }
 
   delete() {
-    this.isDeleting = true;
-    this.$timeout(() => {
-      this.isDeleting = false;
-    }, 5000);
+    if (!this.isFormLoading()) {
+      this.isDeleting = true;
+      this.$timeout(() => {
+        this.isDeleting = false;
+      }, 5000);
+    }
+  }
+
+  isUpdateadble() {
+    return this.hasFormChanged() && !this.isFormLoading() && this.form.$valid;
   }
 }
 

@@ -29,6 +29,25 @@ class MemberService extends BaseService {
     });
   }
 
+  save(formData, added, removed) {
+    let teamMemberProfile = new this._resource();
+    teamMemberProfile.member = formData;
+    teamMemberProfile.added = added;
+    teamMemberProfile.deleted = removed;
+    teamMemberProfile.admin = formData.admin;
+    return new Promise((resolve, reject) => {
+      teamMemberProfile.$save((response) => {
+        resolve(response);
+      }, (response) => {
+        reject(response);
+      });
+    });
+  }
+
+  delete(selected) {
+
+  }
+
   toggleAvailability(member) {
     let admin = member.admin;
     member.available = !member.available;
