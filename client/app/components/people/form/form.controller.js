@@ -56,12 +56,16 @@ class FormController {
   }
 
   delete() {
-    if (!this.isFormLoading()) {
+    if (this.isDeleteable()) {
       this.isDeleting = true;
-      this.$timeout(() => {
-        this.isDeleting = false;
-      }, 5000);
+      this.memberService.delete(this.selected.data).then(() => {
+        this.$state.go('^', null, {reload: true});
+      });
     }
+  }
+
+  isDeleteable() {
+    return this.deleteable && !this.isFormLoading();
   }
 
   isUpdateadble() {

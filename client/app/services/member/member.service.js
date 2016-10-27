@@ -4,8 +4,9 @@ import Member from './member.model';
 class MemberService extends BaseService {
 
   /* @ngInject */
-  constructor($resource, baseUrl, profileService) {
+  constructor($resource, $uibModal, baseUrl, profileService) {
     super($resource, baseUrl);
+    this.$uibModal = $uibModal;
     this.profileService = profileService;
   }
 
@@ -44,8 +45,45 @@ class MemberService extends BaseService {
     });
   }
 
-  delete(selected) {
+  delete(member) {
+    return new Promise((resolve, reject) => {
+      if (member.mobileAppUser || member.mobileKey) {
+        this._showDeleteFailedModal().then(() => reject());
+      } else {
+        this._showDeleteConfirmationModal(member)
+          .then(() => this._doDeletion(member, resolve, reject), () => reject());
+      }
+    });
+  }
 
+  _doDeletion(member, resolve, reject) {
+    let resource = new this._resource();
+    resource.id = member.id;
+    return resource.$delete(this._handle(resolve), this._handle(reject));
+  }
+
+  _showDeleteConfirmationModal(member) {
+    return this.$uibModal.open({
+      component: 'confirmDialog',
+      backdrop: 'static',
+      size: 'sm',
+      resolve: {
+        title: () => 'Confirm Deletion',
+        message: () => `Are you sure you want to delete ${member.name}?`
+      }
+    }).result;
+  }
+
+  _showDeleteFailedModal() {
+    this.$uibModal.open({
+      component: 'alertDialog',
+      size: 'md',
+      resolve: {
+        title: () => 'Delete Failed',
+        message: () =>
+          '<p>Unable to delete mobile app users. Please deactivate mobile app user first before deleting.</p><p>If you have already deactivated this mobile app user then please wait for at most 10 seconds then try again.</p>'
+      }
+    });
   }
 
   toggleAvailability(member) {
