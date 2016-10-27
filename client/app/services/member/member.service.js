@@ -31,8 +31,12 @@ class MemberService extends BaseService {
   }
 
   save(formData, added, removed) {
+    let member = formData.clone();
     let teamMemberProfile = new this._resource();
-    teamMemberProfile.member = formData;
+    delete member['mobileKey'];
+    delete member['comcentId'];
+    delete member['profiles'];
+    teamMemberProfile.member = member;
     teamMemberProfile.added = added;
     teamMemberProfile.deleted = removed;
     teamMemberProfile.admin = formData.admin;
