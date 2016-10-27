@@ -60,6 +60,8 @@ class FormController {
       this.isDeleting = true;
       this.memberService.delete(this.selected.data).then(() => {
         this.$state.go('^', null, {reload: true});
+      }, () => {
+        this.isDeleting = false;
       });
     }
   }
