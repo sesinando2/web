@@ -1,3 +1,5 @@
+const REFRESH = 5000;
+
 class FormController {
 
   /* @ngInject */
@@ -7,6 +9,9 @@ class FormController {
     this.removed = [];
     this.isSaving = false;
     this.isDeleting = false;
+    this.timer = null;
+    this.continueResfresh = true;
+
     this.$state = $state;
     this.$timeout = $timeout;
     this.memberService = memberService;
@@ -15,6 +20,12 @@ class FormController {
   $onInit() {
     this.formData = this.selected.data.clone();
     this.deleteable = this.selected.header('no-delete') !== 'true';
+    this._setupRefreshMobileKey()
+  }
+
+  $onDestroy() {
+    this.$timeout.cancel(this.timer);
+    this.continueResfresh = true;
   }
 
   hasChanged(field) {
@@ -72,6 +83,26 @@ class FormController {
 
   isUpdateadble() {
     return this.hasFormChanged() && !this.isFormLoading() && this.form.$valid;
+  }
+
+  _setupRefreshMobileKey() {
+    this._refreshMobileKey();
+  }
+
+  _refreshMobileKey() {
+    if (this.continueResfresh) {
+      let refreshMobileKey = () => {
+        this.timer = this.$timeout(() => this._refreshMobileKey(), REFRESH);
+      };
+      this._updateMobileKey().then(refreshMobileKey, refreshMobileKey);
+    }
+  }
+
+  _updateMobileKey() {
+    return this.memberService.getMobileKey(this.selected.data.id)
+      .then((mobileKey) => {
+        this.selected.data.mobileKey = this.formData.mobileKey = mobileKey;
+      });
   }
 }
 

@@ -30,6 +30,12 @@ class MemberService extends BaseService {
     });
   }
 
+  getMobileKey(memberId) {
+    return super.get({id: memberId}).then((response) => {
+      return response.data.mobileKey;
+    })
+  }
+
   save(formData, added, removed) {
     let member = formData.clone();
     let teamMemberProfile = new this._resource();
