@@ -11,10 +11,6 @@ class ResendEmailDialogController {
     this.memberService = memberService;
   }
 
-  $onInit() {
-    console.log(this.resolve);
-  }
-
   isIdle() {
     return !this.sending && !this.emailSent;
   }
