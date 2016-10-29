@@ -1,6 +1,6 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import logComponent from './log.component';
+import logsComponent from './logs.component';
 
 let logModule = angular.module('log', [
   uiRouter
@@ -9,13 +9,13 @@ let logModule = angular.module('log', [
 .config(($stateProvider) => {
   "ngInject";
   $stateProvider
-    .state('log', {
-      url: '/log',
-      component: 'log'
+    .state('logs', {
+      url: '/logs',
+      component: 'logs'
     });
 })
 
-.component('log', logComponent)
+.component('logs', logsComponent)
 
 .name;
 
