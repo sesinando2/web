@@ -65,6 +65,17 @@ class MemberService extends BaseService {
       }
     });
   }
+  resend(id, email) {
+    return new Promise((resolve, reject) => {
+      let member = new this._resource();
+      member.id = id;
+      member.$resend({type: email}, (response) => {
+        resolve(response);
+      }, (response) => {
+        reject(response);
+      });
+    });
+  }
 
   _doDeletion(member, resolve, reject) {
     let resource = new this._resource();
@@ -85,7 +96,7 @@ class MemberService extends BaseService {
   }
 
   _showDeleteFailedModal() {
-    this.$uibModal.open({
+    return this.$uibModal.open({
       component: 'alertDialog',
       size: 'md',
       resolve: {
@@ -93,7 +104,7 @@ class MemberService extends BaseService {
         message: () =>
           '<p>Unable to delete mobile app users. Please deactivate mobile app user first before deleting.</p><p>If you have already deactivated this mobile app user then please wait for at most 10 seconds then try again.</p>'
       }
-    });
+    }).result;
   }
 
   toggleAvailability(member) {

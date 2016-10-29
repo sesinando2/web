@@ -1,0 +1,43 @@
+<div class="modal-header">
+  <h3 class="modal-title">Resend To <strong class="text-info" ng-bind-html="$ctrl.resolve.user.name"></strong></h3>
+</div>
+<div class="modal-body">
+  <div class="alert alert-danger alert-dismissible text-center" role="alert" ng-if="$ctrl.emailFailed">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <i class="fa fa-exclamation-triangle"></i> Email failed. Please try again.
+  </div>
+
+  <p ng-if="$ctrl.isIdle()" class="text-center">
+    Please choose which email type to resend to&nbsp;
+    <strong class="text-info">
+      <em><a href="mailto:{{$ctrl.resolve.user.email}}" ng-bind-html="$ctrl.resolve.user.email"></a></em>
+    </strong>
+  </p>
+  <div class="list-group center-block" ng-if="$ctrl.isIdle()" style="max-width: 300px">
+    <a href="#" class="list-group-item" ng-if="$ctrl.isRegisteredOwner()" ng-click="$ctrl.select('approval')">Approval</a>
+    <a href="#" class="list-group-item" ng-if="$ctrl.isRegisteredOwner()" ng-click="$ctrl.select('registration')">Registration</a>
+    <a href="#" class="list-group-item" ng-if="$ctrl.isTrialOwner()" ng-click="$ctrl.select('trial')">Trial</a>
+    <a href="#" class="list-group-item" ng-if="$ctrl.isTrialExpired()" ng-click="$ctrl.select('trial_expired')">Trial</a>
+    <a href="#" class="list-group-item" ng-if="$ctrl.isNotOwner()" ng-click="$ctrl.select('invitation')">Member Invitation</a>
+    <a href="#" class="list-group-item" ng-if="$ctrl.isNotOwnerNorAdmin()" ng-click="$ctrl.select('promotion')">Admin Invitation</a>
+  </div>
+
+  <p ng-if="$ctrl.sending" class="text-center">
+    <i class="fa fa-spinner faa-spin animated"></i>&nbsp;
+    Sending email to&nbsp;
+    <strong class="text-info">
+      <em><a href="mailto:{{$ctrl.resolve.user.email}}" ng-bind-html="$ctrl.resolve.user.email"></a></em>
+    </strong>.
+  </p>
+
+  <div class="alert alert-success alert-dismissible text-center" role="alert" ng-if="$ctrl.emailSent">
+    <i class="fa fa-check"></i> Email has been successfully sent to&nbsp;
+    <strong class="text-info">
+      <em><a href="mailto:{{$ctrl.resolve.user.email}}" ng-bind-html="$ctrl.resolve.user.email"></a></em>
+    </strong>.
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-danger" type="button" ng-click="$ctrl.cancel()"
+          ng-disabled="$ctrl.sending" ng-bind-html="$ctrl.emailSent ? 'Close' : 'Cancel'"></button>
+</div>

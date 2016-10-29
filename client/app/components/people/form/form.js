@@ -1,11 +1,12 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
+import ResendEmail from './resend-email/resend-email';
 import formComponent from './form.component';
-import personName from './name/name';
-import personEmail from './email/email';
+import PersonName from './name/name';
+import PersonEmail from './email/email';
 
 let formModule = angular.module('people.form', [
-  uiRouter, personName, personEmail
+  uiRouter, PersonName, PersonEmail, ResendEmail
 ])
 
 .config(($stateProvider) => {
