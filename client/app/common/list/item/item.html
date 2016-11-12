@@ -1,0 +1,4 @@
+<ng-switch on="$ctrl.getType()" class="list-item">
+  <member ng-switch-when="Member" item="$ctrl.item" enabled="$ctrl.enabled"></member>
+  <team ng-switch-when="Team" item="$ctrl.item" enabled="$ctrl.enabled"></team>
+</ng-switch>

@@ -14,6 +14,18 @@ class BaseService {
     }
   }
 
+  list(max, current, query, accountId) {
+    let params = { offset: this._offset(current, max), max, q: query, sort: 'name', accountId };
+    return this.query(params)
+      .then((response) => {
+        let header = response.header;
+        let items = response.data;
+        let count = parseInt(header('count'));
+        let pageCount = Math.ceil(count / max);
+        return { items, count, pageCount };
+      });
+  }
+
   query(query) {
     return new Promise((resolve, reject) => {
       this._resource.query(query, this._handleList(resolve), this._handle(reject));

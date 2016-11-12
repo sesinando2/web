@@ -1,10 +1,10 @@
-class Member {
+import BaseModel from '../common/base-model';
+
+class Member extends BaseModel {
 
   constructor(data) {
-    Object.assign(this, data);
-
+    super(data);
     this._roles = [];
-
     this._toggleAvailability = null;
     this._delete = null;
   }
@@ -19,10 +19,6 @@ class Member {
     if (this._toggleAvailability) {
       this._toggleAvailability(this)
     }
-  }
-
-  clone() {
-    return new Member(this);
   }
 
   get roles() {

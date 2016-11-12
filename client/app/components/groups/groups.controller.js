@@ -1,6 +1,10 @@
 class GroupsController {
-  constructor() {
+
+  /* @ngInject */
+  constructor($state, $stateParams) {
     this.name = 'groups';
+    this.$state = $state;
+    this.$stateParams = $stateParams;
   }
 }
 

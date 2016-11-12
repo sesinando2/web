@@ -21,8 +21,8 @@ let peopleModule = angular.module('people', [
         },
         data: ($stateParams, memberService, userInfo) => {
           "ngInject";
-
-          return memberService.list($stateParams.max, $stateParams.current, $stateParams.query, userInfo.account.id);
+          return memberService
+            .list($stateParams.max, $stateParams.current, $stateParams.query, userInfo.account.id);
         }
       },
       params: {

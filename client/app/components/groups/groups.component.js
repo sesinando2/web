@@ -4,7 +4,10 @@ import './groups.styl';
 
 let groupsComponent = {
   restrict: 'E',
-  bindings: {},
+  bindings: {
+    accountId: '<',
+    data: '='
+  },
   template,
   controller
 };

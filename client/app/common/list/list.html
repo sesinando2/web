@@ -6,7 +6,7 @@
     <li ng-repeat="data in $ctrl.items track by data.id" class="list-group-item"
         ng-class="{ disabled: !$ctrl.enabled, active: $ctrl.selected == data.id }"
         ng-click="$ctrl.select(data)">
-      <member item="data" enabled="$ctrl.enabled" update-list="$ctrl.refresh()"></member>
+      <list-item item="data" enabled="$ctrl.enabled"></list-item>
     </li>
   </ul>
 </div>

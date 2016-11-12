@@ -10,16 +10,6 @@ class MemberService extends BaseService {
     this.profileService = profileService;
   }
 
-  list(max, current, query, accountId) {
-    return this.query({ offset: this._offset(current, max), max, q: query, sort: 'name', accountId }).then((response) => {
-      let header = response.header;
-      let items = response.data;
-      let count = parseInt(header('count'));
-      let pageCount = Math.ceil(count / max);
-      return { items, count, pageCount };
-    });
-  }
-
   get(query) {
     return super.get(query).then((response) => {
       let member = response.data;
@@ -56,14 +46,15 @@ class MemberService extends BaseService {
   }
 
   delete(member) {
-    return new Promise((resolve, reject) => {
-      if (member.mobileAppUser || member.mobileKey) {
-        this._showDeleteFailedModal().then(() => reject());
-      } else {
-        this._showDeleteConfirmationModal(member)
-          .then(() => this._doDeletion(member, resolve, reject), () => reject());
-      }
-    });
+    let promise = null;
+    if (member.mobileAppUser || member.mobileKey) {
+      promise = this._showDeleteFailedModal()
+        .then(() => Promise.reject());
+    } else {
+      promise = this._showDeleteConfirmationModal(member)
+        .then(() => super.delete(member));
+    }
+    return promise;
   }
   resend(id, email) {
     return new Promise((resolve, reject) => {
@@ -75,12 +66,6 @@ class MemberService extends BaseService {
         reject(response);
       });
     });
-  }
-
-  _doDeletion(member, resolve, reject) {
-    let resource = new this._resource();
-    resource.id = member.id;
-    return resource.$delete(this._handle(resolve), this._handle(reject));
   }
 
   _showDeleteConfirmationModal(member) {

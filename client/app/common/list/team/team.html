@@ -1,0 +1,8 @@
+<div class="team">
+  {{$ctrl.item.name}}
+  <a href="" class="pull-right has-error" ng-hide="!$ctrl.enabled"
+     ng-click="$ctrl.item.delete(); $event.stopPropagation();"
+     tooltip title="Click to Delete" data-placement="left">
+    <span class="glyphicon glyphicon-trash"></span>
+  </a>
+</div>
