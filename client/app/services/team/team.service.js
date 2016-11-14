@@ -8,6 +8,12 @@ class TeamService extends BaseService {
     super($resource, baseUrl);
   }
 
+  delete(team) {
+    let group = new this._resource();
+    group.id = team.id;
+    return super.delete(group);
+  }
+
   _wrapData(data) {
     return new Team(data);
   }

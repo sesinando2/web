@@ -11,7 +11,7 @@ class ListController {
         this.$state.go('people.details', { id: data.id, current: this.current, query: this.search });
         break;
       case 'Team':
-        console.log('Test');
+        console.log(data);
         break;
     }
 

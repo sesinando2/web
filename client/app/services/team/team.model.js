@@ -9,7 +9,7 @@ class Team extends BaseModel {
 
   delete() {
     if (this._delete) {
-      this._delete();
+      this._delete(this);
     }
   }
 
