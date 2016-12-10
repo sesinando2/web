@@ -1,9 +1,10 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import groupsComponent from './groups.component';
+import groupsForm from './form/form';
 
 let groupsModule = angular.module('groups', [
-  uiRouter
+  uiRouter, groupsForm
 ])
 
 .config(($stateProvider) => {

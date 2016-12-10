@@ -11,7 +11,10 @@ class ListController {
         this.$state.go('people.details', { id: data.id, current: this.current, query: this.search });
         break;
       case 'Team':
-        console.log(data);
+        this.$state.go('groups.details', { id: data.id, current: this.current, query: this.search });
+        break;
+      default:
+        throw `Unknown constructor for + ${data}`
         break;
     }
 
